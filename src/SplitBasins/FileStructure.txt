@@ -1,0 +1,49 @@
+createStorageOutflowCurves.py
+-description: replaces the spreadsheet process that Amanda devised and writes table to DSS file
+-depends on: hec module, hecConfig.py, ExampleHydraulicComparison.py (by way of dtf file)
+--indexOfMaxValue
+--findFirst
+--findLast
+--buildStorageOutflowCurve (buildStorageOutflowCurveFromHydrograph)
+--findInflowStart (indexOfMaxValue, findFirst)
+--findMaxReleaseRateIndex (indexOfMaxValue, findLast)
+--buildStorageOutflowCurveFromHydrograph (findInflowStart, findMaxReleaseRateIndex)
+--writeTable
+
+ExampleDssUsage.py
+-description: writes dummy rating curve to DSS file
+-depends on: hec module, hecConfig.py
+--GetMaxValueIndex
+
+ExampleHydraulicComparison.py
+-description: get hydraulic results from DSS file (does nothing with them yet)
+-depends on: hec module, hecConfig.py
+--GetMaxValueIndex
+
+hecConfig.py (class HecConfig imported as config)
+-description: config file with setup variables for HMS and RAS runs
+--__init__
+--getDataTransferFilePath
+--getHmsProjectPath
+--getRasProjectPath
+
+runHecHmsModel.py
+-description: runs HEC-HMS instance using hms module; exactly as in HEC-HMS documentation for command line
+-depends on: hecConfig.py, hms module
+
+hecModel.py (class Model)
+-description: contains all methods to control work flow for each subwatershed
+-depends on: RunHecHmsModel.py, createStorageOutflowCurves.py, ExampleHydraulicComparison.py, win32com module
+--__init__
+--runHms
+--createStorageOutflowCurves
+--runRas
+--getHydraulicResults
+
+runModel.py
+-description: controls location where methods from hecModel.py are run
+-depends on: hecModel.py, hecConfig.py
+
+runModel.cmd
+-description: sets environmental variables and initiates python scripts
+-depends on: runModel.py

@@ -1,0 +1,22 @@
+What we need (and don't have yet) for a real run:
+1. real table names for storage-flow data (createStorageOutflowCurves.py, ExampleDSSUsage.py)
+2. real subbasin areas (createStorageOutflowCurves.py)
+3. full list of stations with river-reach name, as shown in DSS paths (ExampleHydraulicComparison.py)
+4. full list of subbasin name:release rate pairs for JSON input file (loaded in runModel.py; used in createStorageOutflowCurves.py)
+5. in hecConfig.py:
+	--script path - assumes all scripts in same directory
+	--path to HMS project files; HMS project name(s) - multiple for STCR, one for USC
+		--put all paths into a list for STCR so runModel.py can iterate through them and run HMS in steps 9 and 11
+		--each subsubwatershed can be in a separate directory if we change directories between HMS runs - is it critical to have them in separate directories or can we use file name conventions to separate them?
+	--path to RAS project files; RAS project name - one for STCR, one for USC
+  
+Mods for USC:
+--dataPath in ExampleHydraulicComparison.py
+--*maybe* timeStep in function buildStorageOutflowCurveFromHydrograph in createStorageOutflowCurves.py
+
+
+Notes:
+The first four items needed for a real run will need to be generated either by computer code or by hand. Examples of each of these are currently hard-coded, so the Optimatics code will need to be modified to take input files. (1) and (2) flow naturally from initHMS.py (in-house code) and should be automated since we are varying the percent redevelopment and release rate. (3) can be adapted from the bank station comparison code (in-house); it does not necessarily have to be automated since we only have to do it once for each (sub)watershed. (4) will take a little more work since we'd like an easy way to input a separate release rate for each subbasin. Excluding this functionality for now and opting for a single release rate over the entire subwatershed (e.g., STCR or USC). When (4) is implemented, it could be manual or automated since the release rate would have to be set individually for each subbasin. A GUI with a map of the subwatershed would be prohibitively time consuming to program. (5) are easy modificatons to the hecConfig.py file and require no extra work.
+
+The modifications required to run the code for USC instead of STCR include redefining the data path for hydraulic comparison because the date and time variables are different in the USC output. The time step is different in only one of the cases in USC, so it will probably not need to be modified.
+

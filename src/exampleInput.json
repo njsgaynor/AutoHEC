@@ -1,0 +1,26 @@
+{
+    "subbasins": [
+        {
+            "name": "W146260",
+            "releaseRate": 0.15,
+            "area": 0.13773,
+            "tableName": "TABLE 1"
+        },
+        {
+            "name": "W146370",
+            "releaseRate": 0.2,
+            "area": 0.08628,
+            "tableName": "TABLE 2"
+        },
+        {
+            "name": "W146380",
+            "releaseRate": 0.3,
+            "area": 0.29834,
+            "tableName": "TABLE 3"
+        }
+    ],
+    "ditchNames": [
+        "E STONY CR DITCH E STONY CR DITCH/3.617",
+        "E STONY CR DN E STCR 1/0"
+    ]
+}
