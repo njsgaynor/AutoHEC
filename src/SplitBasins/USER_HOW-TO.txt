@@ -1,0 +1,35 @@
+### Splitting subbasins: part of the AutoHEC package ###
+Code repository for automation scripts related to the Metropolitan Water
+Reclamation District of Greater Chicago Watershed Release Rate project
+at the Illinois State Water Survey (2015-2016).
+  *Developed using Python 2.7.11, HEC-HMS 3.5, HEC-RAS 4.0, and HEC-DSSVue 2.0.1
+  *Creator(s): Nicole JS Gaynor, ISWS
+  *Technical documentation in AutoHEC/src/SplitBasins/README.txt
+
+
+## Purpose ##
+This program was built to split subbasins in the HEC-HMS model into a
+developed portion and an undeveloped portion. The developed portion routes
+through a reservoir. Then the reservoir and the undeveloped portion of the
+subbasin route through a shared junction. Output from this file includes
+a pickle file that stores the subbasin name, storage-outflow table name,
+the maximum release rate in cfs/acre for the reservoir, and the area of
+the subbasin. This data is then used in the AutoHEC package to create
+rating curves for each reservoir for a second HEC-HMS run.
+
+
+## How to run code that splits basins independent of running models ##
+1. Modify *_hecConfig.py to find the files that need to be modified and to
+   reflect the characteristics of the future subbasins (must be named
+   hecConfig.py, not one of the *_hecConfig.py files). This will only run
+   for a single subsubwatershed. **When preparing the bank station
+   elevations file, do not include Node Names in the table (under
+   Options menu in the Profile Output Table of HEC-RAS).**
+2. Open Windows Command Prompt.
+3. Change to directory containing runInitHMS.cmd (AutoHEC/src/WeRunFirst)
+   directory ("dir" lists directory contents and "cd" changes directory).
+4. Type "runInitHMS.cmd" into the Windows command line and press Enter.
+   Output will be saved to output.txt.
+
+## Notes ##
+[none at the moment]
