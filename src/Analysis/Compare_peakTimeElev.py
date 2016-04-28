@@ -37,7 +37,7 @@ def roundSigfigs(num, sigfigs):
         return str(0.0)  # Can't take the log of 0
 
 def writePeakDiff(outFile, flowDiff):
-    print("writeFlowDiff")
+    print("Writing difference data to CSV file " + outFile + "...")
     if(os.path.isfile(outFile)):
         os.remove(outFile)
     else:
@@ -47,7 +47,7 @@ def writePeakDiff(outFile, flowDiff):
             writer.writerows(flowDiff)
 
 def getPeak(bVersions, cVersions, filePath, runName):
-    print("getFlow")
+    print("Reading peak flow data from text file...")
     peakDiff = {}
     for v in range(len(bVersions)):
         bV = bVersions[v]
@@ -83,10 +83,6 @@ def getPeak(bVersions, cVersions, filePath, runName):
                     u[2] = roundSigfigs(float(u[2]), 7)  # eight characters/seven sig figs allowed
                     newKey = "/" + "/".join(u[1:3])  # river/reach
                     figName = " ".join(u[1:3])
-                    #print(dataAuto[key])
-                    #print(dataManual[key])
-                    #flowDiff[newKey] = map(operator.sub, flowDataAuto.pop(key), flowDataManual.pop(key))
-                    #print(flowDiff)
                     plotmeManualElev.append(dataManualElev[newKey + "/LOCATION-ELEV//MAX STAGE/" + runName + "/"])
                     plotmeManualTime.append(dataManualTime[newKey + "/LOCATION-TIME//MAX STAGE/" + runName + "/"])
                     plotmeAutoElev.append(dataAutoElev[newKey + "/LOCATION-ELEV//MAX STAGE/" + runName + "/"])
@@ -98,9 +94,9 @@ def getPeak(bVersions, cVersions, filePath, runName):
                                dataManualTime[newKey + "/LOCATION-TIME//MAX STAGE/" + runName + "/"]
                     plotmeDiffTime.append(diffTime)
                     if (abs(diffElev) > 0.1):
-                        print("Elev", newKey, diffElev)
-                    if (abs(diffTime) > 0.5):
-                        print("Time", newKey, diffTime)
+                        print("WSEL >0.1 ft different: " + newKey +  "(" + str(diffElev) + ")")
+                    #if (abs(diffTime) > 0.5):
+                    #    print("Peak time >0.5 hr different: " + newKey +  "(" + str(diffTime) + ")")
                 else:
                     pass
             except ValueError:  # if station ID includes anything but numbers (* is interpolated; letters may be a structure)
@@ -114,6 +110,7 @@ def getPeak(bVersions, cVersions, filePath, runName):
     pass
 
 def plotScatter(dataManualX, dataManualY, dataAutoX, dataAutoY, dataDiffX, dataDiffY, bV, cV, filePath):
+    print("Plotting V" + bV + " - V" + cV + "...")
     pyplot.ioff()
     pyplot.figure(1)
     pyplot.scatter(dataManualX, dataManualY, c='blue')
@@ -130,7 +127,7 @@ def plotScatter(dataManualX, dataManualY, dataAutoX, dataAutoY, dataDiffX, dataD
     pyplot.close("all")
 
 # Used to look at state of variables for debugging
-print('done')
+print('Compare_peakTimeElev.py is done running.')
 
 def main():
     getData()

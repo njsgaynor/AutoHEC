@@ -10,7 +10,7 @@ def setme1(self):
     self.scriptPath="C:/Users/nschiff2/IdeaProjects/AutoHEC/src"
     self.hmsDir="HEC-HMS"
     self.modelPath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/"
-    self.modelVersion = self.modelPath + "Stony_V4.0optim/"
+    self.modelVersion = self.modelPath + "Stony_V6.1optim_retry/"
     self.hmsVersion = self.modelVersion + "HydrologicModels/ExistingConditions/"
     self.hmsCommand="HEC-HMS.cmd"
     self.dssDir="HEC-DSSVue"
@@ -18,7 +18,7 @@ def setme1(self):
 
     # Use these options only when you need a different model version to build the
     # storage-outflow curves
-    self.osModelVersion = self.modelPath + "Stony_V5.0optim/"
+    self.osModelVersion = self.modelPath + "Stony_V8.0optim/"
     self.osHmsVersion = self.osModelVersion + "HydrologicModels/ExistingConditions/"
 
     return self
@@ -31,9 +31,9 @@ def setme2(self):
     self.hmsRunName = "100YR12HRHUFFARF" #"HuffQII_100yr12hrISWS" #"HuffQIII_100yr24hrISWS"
     self.hmsMetFile = self.hmsProjectPath + "/HuffQII_100yr12hr" #"/HuffQII_100yr12hrISWS" #"/HuffQIII_100yr24hrISWS"
     self.hmsGageName = "100YR12HRHUFFARF" #"HuffQII_100yr12hrISWS" #"HuffQIII_100yr24hrISWS"
-    #self.hmsRunName = "HuffQIII_100yr24hrISWS"
-    #self.hmsMetFile = self.hmsProjectPath + "/HuffQIII_100yr24hrISWS"
-    #self.hmsGageName = "HuffQIII_100yr24hrISWS"
+    # self.hmsRunName = "HuffQIII_100yr24hrISWS"
+    # self.hmsMetFile = self.hmsProjectPath + "/HuffQIII_100yr24hrISWS"
+    # self.hmsGageName = "HuffQIII_100yr24hrISWS"
 
     # Future parameters
     # --redevelopment is the proportion of the subbasin that is routed
@@ -45,7 +45,7 @@ def setme2(self):
     #   run HEC-HMS and HEC-RAS.
     self.redevelopment = 15
     self.curvenumber = 88
-    self.releaserate = 0.15
+    self.releaserate = 0.3
 
     # HMS project configuration data
     # --numHmsModels is the number of HMS model runs needed for a single RAS run
@@ -57,6 +57,7 @@ def setme2(self):
     #   curves. inputFileName is automatically generated and should not be changed.
     self.numHmsModels = 6
     self.interval = "5MIN"
+    self.intervalNum = 5
     self.basinin = self.hmsProjectPath + "/" + self.hmsProjectName + " - Copy.basin"
     self.basinout = self.hmsProjectPath + "/" + self.hmsProjectName + ".basin"
     self.pdatafile = self.hmsProjectPath + "/" + self.hmsProjectName + ".pdata"
@@ -73,8 +74,8 @@ def setme2(self):
     # --stationFileName is the location of a text file that lists all the
     #   station names, one per line (usually the home directory of a watershed)
     self.rasProjectName = "STCR_Design"
-    self.rasPlanName = "100YR12HRHuffQII" #"HUFFQIII_100YR24HRISWS"
+    self.rasPlanName = "100YR12HRHuffQII" #"HUFFQIII_100YR24HRISWS" #
     self.rasProjectPath = self.modelVersion + "HydraulicModels/ExistingConditions/STCR/STCR_DesignRuns"
-    self.stationFileName = self.modelPath + "/" + self.rasProjectName + "_StationList.txt"
+    self.stationFileName = self.modelPath + self.rasProjectName + "_StationList.txt"
 
     return self

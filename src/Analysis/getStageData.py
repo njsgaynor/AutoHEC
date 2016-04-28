@@ -1,9 +1,9 @@
 import sys
-sys.path.append("C:/Users/nschiff2/IdeaProjects/AutoHEC/src/WeRunFirst/")
+sys.path.append("C:/Users/nschiff2/IdeaProjects/AutoHEC/src/Analysis/")
 
 from hec.heclib.dss import HecDss
 import pickle
-from src.Analysis.HEC_Inundation_Config import BankStation_config
+from HEC_Inundation_Config import BankStation_config
 
 # Read in hourly (or other periodic) STAGE data from HEC-RAS DSS file. Store data in a pickle file for further use.
 # Example of data paths:
@@ -36,7 +36,7 @@ for i in range(len(dataToGet)):
                 splitPath[2] = str(dataLocation)
                 fullLoc = "/".join(splitPath)
                 dataDict.update({fullLoc: dataValue})
-    print("saving " + dataPath + dataToGet[i][1] + ".txt")
+    print("Saving " + dataPath + dataToGet[i][1] + ".txt")
     outFile = open(dataPath + dataToGet[i][1] + ".txt", 'wb')
     pickle.dump(dataDict, outFile)
     outFile.close()

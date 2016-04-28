@@ -144,7 +144,7 @@ def writeJsonInput(subbasinList, stationList, inputFileName):
         json.dump(outputDS, inputFile)
 
 
-def modMetFile(metFile, metData, hmsPath, sbList):
+def modMetFile(metFile, metData, sbList):
     metFileName = metFile
     print(metFile)
     with open(metFileName, 'ab') as metFileObj:
@@ -161,11 +161,11 @@ def main(config):
     tableList, subbasinList = readBasinFile(ws, config.scriptPath)
     stationList = readList(config.stationFileName)
     writeJsonInput(subbasinList, stationList, config.inputFileName)
-    modMetFile(metFile, config.hmsGageName, config.getHmsProjectPath(), tableList)
+    modMetFile(metFile, config.hmsGageName, tableList)
 
 
 if __name__=="__main__":
-    import hecConfig
+    from src import hecConfig
     reload(hecConfig)
     config = hecConfig.HecConfig()
     main(config)

@@ -36,7 +36,7 @@ def roundSigfigs(num, sigfigs):
         return str(0.0)  # Can't take the log of 0
 
 def writeFlowDiff(outFile, flowDiff):
-    print("writeSODiff")
+    print("Writing difference data...")
     if(os.path.isfile(outFile)):
         os.remove(outFile)
     else:
@@ -46,27 +46,29 @@ def writeFlowDiff(outFile, flowDiff):
             writer.writerows(flowDiff)
 
 def getSO(bVersions, cVersions, filePath):
-    print("getSO")
+    print("Reading storage-outflow data from text files...")
     soDiff = {}
     for v in range(len(bVersions)):
         bV = bVersions[v]
         cV = cVersions[v]
-        dataFileManual = "storageoutflow_V" + bV + ".txt"
-        dataFileAuto = "storageoutflow_V" + cV + ".txt"
+        dataFileB = "storageoutflow_V" + bV + ".txt"
+        dataFileC = "storageoutflow_V" + cV + ".txt"
         # Loads flow data from manual and automated versions, stored as dict
-        soDataManual = pickle.load(open(filePath + dataFileManual, 'rb'))
-        soDataAuto = pickle.load(open(filePath + dataFileAuto, 'rb'))
-        keyListAuto = soDataAuto.keys()
-        keyListManual = soDataManual.keys()
-        print(len(keyListAuto), len(keyListManual))
+        soDataB = pickle.load(open(filePath + dataFileB, 'rb'))
+        soDataC = pickle.load(open(filePath + dataFileC, 'rb'))
+        keyListC = soDataC.keys()
+        keyListB = soDataB.keys()
+        print("Number of subbasins in V" + bV + ":" + str(len(keyListC)))
+        print("Number of subbasins in V" + cV + ":" + str(len(keyListB)))
+        print(keyListC)
+        print(keyListB)
         # Calculate difference between auto and manual versions
         #for k in keyList:
         #    flowDiff[k] = map(operator.sub, flowDataAuto[k], flowDataManual[k])
         # Get rid of interpolated stations
-        for key in keyListAuto:
+        for key in keyListC:
             t = key.split('/')
             u = t[2].split('_')
-            print(u)
             if (len(u[0]) > 1):
                 try:
                     float(u[1])
@@ -80,11 +82,10 @@ def getSO(bVersions, cVersions, filePath):
             else:
                 print("Key too short, using longer key")
                 newKey = u[0] + "_" + u[1]
-            soDataAuto[newKey] = soDataAuto.pop(key)
-        for key in keyListManual:
+            soDataC[newKey] = soDataC.pop(key)
+        for key in keyListB:
             t = key.split('/')
             u = t[2].split('_')
-            print(u)
             if (len(u[0]) > 1):
                 try:
                     float(u[1])
@@ -98,36 +99,39 @@ def getSO(bVersions, cVersions, filePath):
             else:
                 print("Key too short, using longer key")
                 newKey = u[0] + "_" + u[1]
-            soDataManual[newKey] = soDataManual.pop(key)
-        # for key in keyListManual:
+            soDataB[newKey] = soDataB.pop(key)
+        # for key in keyListB:
         #     u = key.split('_')
         #     try:
         #         float(u[1])
-        #         soDataManual[u[0]] = soDataManual.pop(key)
+        #         soDataB[u[0]] = soDataB.pop(key)
         #     except Exception, e:
         #         print(e, "using longer key")
-        #         soDataManual[u[0] + "_" + u[1]] = soDataManual.pop(key)
+        #         soDataB[u[0] + "_" + u[1]] = soDataB.pop(key)
             # if '_0.3' in key:
             #     startI = key.find('.0_0.3')
             #     newKey = key[0:startI] + '_0_0.15' + key[startI+5:]
-            #     soDataManual[newKey] = soDataManual.pop(key)
+            #     soDataB[newKey] = soDataB.pop(key)
             # elif '_0.3' in key:
             #     startI = key.find('.0_0.3')
             #     newKey = key[0:startI] + '_0_0.15' + key[startI+5:]
-            #     soDataManual[newKey] = soDataManual.pop(key)
+            #     soDataB[newKey] = soDataB.pop(key)
             #newKey = u[0]
             #u = key.split('/')
             try:
-                plotSO(soDataManual[newKey], soDataAuto[newKey], t[2], filePath, bV, cV)
-         #       soDiff[newKey] = map(operator.sub, soDataAuto.pop(newKey), soDataManual.pop(newKey))
+                print("Plotting data for " + newKey +  '...')
+                plotSO(soDataB[newKey], soDataC[newKey], t[2], filePath, bV, cV)
+                #print(soDataB[newKey])
+                #print(soDataC[newKey])
+         #       soDiff[newKey] = map(operator.sub, soDataC.pop(newKey), soDataB.pop(newKey))
             except KeyError:
-                print("Key not found: ", newKey)
+                print("Key not found in V" + bV + ": " + newKey)
         # Write diff data to CSV file
         #writeFlowDiff("hydrograph_" + i + ".csv", flowDiff)
        # print(soDiff)
 
 def plotSO(soDataManual, soDataAuto, tableName, filePath, bV, cV):
-    print(tableName)
+    #print("Plotting data from " + tableName + "...")
     pyplot.ioff()
     manualLine, = pyplot.plot(soDataManual[0], soDataManual[1], 'b:', lw=2, Label=bV)
     autoLine, = pyplot.plot(soDataAuto[0], soDataAuto[1], 'r-', Label=cV)

@@ -17,26 +17,28 @@ for s in subsubwatersheds:
 
     # obtain configuration details for HEC applications for
     # python and jython scripts
-    from compileall import compile_file
     try:
         os.remove("hecConfig.pyc")
+        os.remove("hecConfig$py.class")
     except Exception, e:
-        print("hecConfig.pyc does not yet exist.")
+        print("hecConfig.pyc or hecConfig$py.class does not yet exist.")
     shutil.copyfile(backupFileName, "hecConfig.py")
-    #compile_file("hecConfig.py")
     import hecConfig
-    #reload(hecConfig)
+    reload(hecConfig)
     config = hecConfig.HecConfig()
     curdir = os.getcwd()
     os.chdir(config.scriptPath)
+    #print(vars(config))
 
     # STEPS 03-06: split subbasins and assign future properties
-    print("InitHMS")
+    print("Creating redeveloped subbasins...")
     SplitBasins.InitHMS.main(config)
 
     swStructure = json.load(open(config.inputFileName, 'rb'))
     subbasins = swStructure['subbasins']
     ditchNames = swStructure['ditchNames']
+    print("Input file name: " + config.inputFileName)
+    print(subbasins)
 
     # obtain instance of our HEC "model"
     from hecModel import Model
@@ -47,19 +49,23 @@ for s in subsubwatersheds:
     model.newStorageOutflowCurves()
 
     # STEP 09: run HEC-HMS model
+    print("Running HEC-HMS the first time...")
     model.runHms()
 
     # Step 10: build storage curves
     # Create for a 24h storm or copy for a 12h storm
     # The 24h storm must run before the 12h storm
     if "12" in config.hmsRunName:
+        print("Copying storage-outflow curves...")
         model.copyStorageOutflowCurves(subbasins)
     elif "24" in config.hmsRunName:
+        print("Creating storage-outflow curves...")
         model.createStorageOutflowCurves(subbasins)
     else:
         print("Can't tell if 12h or 24h precipitation.")
 
     # Step 11: run HEC-HMS model
+    print("Running HEC-HMS the second time...")
     model.runHms()
 
     # move config file back to original file name

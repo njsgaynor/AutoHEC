@@ -2,17 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63a7f381-e136-4fc5-afa4-d0b8ed165c6e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Analysis/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Analysis/USER_HOW-TO.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/SplitBasins/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/SplitBasins/USER_HOW-TO.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/USER_HOW-TO.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/SplitBasins/getStageData.py" afterPath="$PROJECT_DIR$/src/Analysis/getStageData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/Compare_Config$py.class" afterPath="$PROJECT_DIR$/src/Analysis/Compare_Config$py.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hecConfig$py.class" afterPath="$PROJECT_DIR$/src/hecConfig$py.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/parent_hecConfig$py.class" afterPath="$PROJECT_DIR$/src/parent_hecConfig$py.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/parent_hecConfig_USC$py.class" afterPath="$PROJECT_DIR$/src/parent_hecConfig_USC$py.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/README.html" afterPath="$PROJECT_DIR$/src/Analysis/README.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/USC_hecConfig.py" afterPath="$PROJECT_DIR$/src/USC_hecConfig.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/Compare_Config.py" afterPath="$PROJECT_DIR$/src/Analysis/Compare_Config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/Compare_StorageOutflow.py" afterPath="$PROJECT_DIR$/src/Analysis/Compare_StorageOutflow.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/Compare_peakTimeElev.py" afterPath="$PROJECT_DIR$/src/Analysis/Compare_peakTimeElev.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/HEC_Inundation.py" afterPath="$PROJECT_DIR$/src/Analysis/HEC_Inundation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/HEC_Inundation_Config.py" afterPath="$PROJECT_DIR$/src/Analysis/HEC_Inundation_Config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/USER_HOW-TO.txt" afterPath="$PROJECT_DIR$/src/Analysis/USER_HOW-TO.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/getPeakData.py" afterPath="$PROJECT_DIR$/src/Analysis/getPeakData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Analysis/getSOData.py" afterPath="$PROJECT_DIR$/src/Analysis/getSOData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SplitBasins/InitHMS.py" afterPath="$PROJECT_DIR$/src/SplitBasins/InitHMS.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/copyStorageOutflowCurves.py" afterPath="$PROJECT_DIR$/src/copyStorageOutflowCurves.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/createStorageOutflowCurves.py" afterPath="$PROJECT_DIR$/src/createStorageOutflowCurves.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dummyStorageOutflowCurves.py" afterPath="$PROJECT_DIR$/src/dummyStorageOutflowCurves.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hecConfig.py" afterPath="$PROJECT_DIR$/src/hecConfig.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hecModel.py" afterPath="$PROJECT_DIR$/src/hecModel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jythonDtf.txt" afterPath="$PROJECT_DIR$/src/jythonDtf.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/output.txt" afterPath="$PROJECT_DIR$/src/output.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/parent_hecConfig.py" afterPath="$PROJECT_DIR$/src/parent_hecConfig.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/parent_hecConfig_USC.py" afterPath="$PROJECT_DIR$/src/parent_hecConfig_USC.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/runModel.cmd" afterPath="$PROJECT_DIR$/src/runModel.cmd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/runModel.py" afterPath="$PROJECT_DIR$/src/runModel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/subbasin_records.json" afterPath="$PROJECT_DIR$/src/subbasin_records.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/table_names.json" afterPath="$PROJECT_DIR$/src/table_names.json" />
     </list>
     <ignored path="AutoHEC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,13 +49,13 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/AutoHEC$Compare_StorageOutflow__1_.coverage" NAME="Compare_StorageOutflow (1) Coverage Results" MODIFIED="1461262768099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
-    <SUITE FILE_PATH="coverage/AutoHEC$Compare_hydrographs.coverage" NAME="Compare_hydrographs Coverage Results" MODIFIED="1461265400614" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
+    <SUITE FILE_PATH="coverage/AutoHEC$Compare_StorageOutflow__1_.coverage" NAME="Compare_StorageOutflow (1) Coverage Results" MODIFIED="1461780125447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
+    <SUITE FILE_PATH="coverage/AutoHEC$Compare_hydrographs.coverage" NAME="Compare_hydrographs Coverage Results" MODIFIED="1461789257453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
     <SUITE FILE_PATH="coverage/AutoHEC$Compare_StorageOutflow.coverage" NAME="Compare_StorageOutflow Coverage Results" MODIFIED="1461172779242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/WeRunFirst" />
     <SUITE FILE_PATH="coverage/AutoHEC$getSOData.coverage" NAME="getSOData Coverage Results" MODIFIED="1459259585427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/WeRunFirst" />
-    <SUITE FILE_PATH="coverage/AutoHEC$HEC_Inundation.coverage" NAME="HEC_Inundation Coverage Results" MODIFIED="1459435176060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/WeRunFirst" />
-    <SUITE FILE_PATH="coverage/AutoHEC$InitHMS.coverage" NAME="InitHMS Coverage Results" MODIFIED="1458682792707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/WeRunFirst" />
-    <SUITE FILE_PATH="coverage/AutoHEC$Compare_peakTimeElev__1_.coverage" NAME="Compare_peakTimeElev (1) Coverage Results" MODIFIED="1461264385879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
+    <SUITE FILE_PATH="coverage/AutoHEC$HEC_Inundation.coverage" NAME="HEC_Inundation Coverage Results" MODIFIED="1461598100559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
+    <SUITE FILE_PATH="coverage/AutoHEC$InitHMS.coverage" NAME="InitHMS Coverage Results" MODIFIED="1461768994548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/SplitBasins" />
+    <SUITE FILE_PATH="coverage/AutoHEC$Compare_peakTimeElev__1_.coverage" NAME="Compare_peakTimeElev (1) Coverage Results" MODIFIED="1461863917033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Analysis" />
     <SUITE FILE_PATH="coverage/AutoHEC$Compare_peakTimeElev.coverage" NAME="Compare_peakTimeElev Coverage Results" MODIFIED="1461174867674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/WeRunFirst" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -54,37 +71,47 @@
         <entry file="file://$PROJECT_DIR$/src/parent_hecConfig_USC.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+              <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Compare_Config.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="parent_hecConfig.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parent_hecConfig.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Compare_Config.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_Config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+            <state vertical-scroll-proportion="0.819788">
+              <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/README.txt">
+      <file leaf-file-name="runModel.cmd" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/runModel.cmd">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="USER_HOW-TO.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/USER_HOW-TO.txt">
+      <file leaf-file-name="Compare_hydrographs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_hydrographs.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="45" column="45" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -113,11 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/RunHecHmsModel.py" />
-        <option value="$PROJECT_DIR$/src/ExampleDssUsage.py" />
-        <option value="$PROJECT_DIR$/src/ExampleHydraulicComparison.py" />
-        <option value="$PROJECT_DIR$/src/WeRunFirst/hecElements/Reservoir_class.py" />
-        <option value="$PROJECT_DIR$/src/WeRunFirst/BankStationConfig.py" />
         <option value="$PROJECT_DIR$/Compare_hydrographs.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/parent_hecConfig.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/hecElements/Element_class.py" />
@@ -125,22 +147,13 @@
         <option value="$PROJECT_DIR$/src/hecConfig.md" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/runHEC_Inundation.cmd" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/InitHMS.py" />
-        <option value="$PROJECT_DIR$/src/copyStorageOutflowCurves.py" />
-        <option value="$PROJECT_DIR$/src/STCR_combined_hecConfig.py" />
-        <option value="$PROJECT_DIR$/src/OLCRHMS_hecConfig.py" />
-        <option value="$PROJECT_DIR$/src/MPDT_revised_hecConfig.py" />
         <option value="$PROJECT_DIR$/src/MEDT_HMS_hecConfig.py" />
         <option value="$PROJECT_DIR$/src/LUDT_Design_hecConfig.py" />
         <option value="$PROJECT_DIR$/src/LDDT_HMS_hecConfig.py" />
-        <option value="$PROJECT_DIR$/src/parent_hecConfig.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/HEC_Inundation.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/getStageData.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/HEC_Inundation_Config.py" />
-        <option value="$PROJECT_DIR$/src/runModel.cmd" />
-        <option value="$PROJECT_DIR$/src/hecModel.py" />
         <option value="$PROJECT_DIR$/src/USC_hecConfig.py" />
-        <option value="$PROJECT_DIR$/src/dummyStorageOutflowCurves.py" />
-        <option value="$PROJECT_DIR$/src/createStorageOutflowCurves.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/Compare_peakTimeElev.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/Compare_Config.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/Compare_StorageOutflow.py" />
@@ -148,22 +161,36 @@
         <option value="$PROJECT_DIR$/src/WeRunFirst/getFlowData.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/getPeakData.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/getSOData.py" />
-        <option value="$PROJECT_DIR$/src/runModel.py" />
         <option value="$PROJECT_DIR$/src/WeRunFirst/README.md" />
         <option value="$PROJECT_DIR$/src/README.md" />
-        <option value="$PROJECT_DIR$/src/Analysis/Compare_Config.py" />
-        <option value="$PROJECT_DIR$/src/Analysis/getSOData.py" />
-        <option value="$PROJECT_DIR$/src/Analysis/Compare_peakTimeElev.py" />
         <option value="$PROJECT_DIR$/src/Analysis/getFlowData.py" />
-        <option value="$PROJECT_DIR$/src/Analysis/getPeakData.py" />
         <option value="$PROJECT_DIR$/src/Analysis/Compare_hydrographs.py" />
-        <option value="$PROJECT_DIR$/src/Analysis/Compare_StorageOutflow.py" />
-        <option value="$PROJECT_DIR$/src/parent_hecConfig_USC.py" />
         <option value="$PROJECT_DIR$/src/SplitBasins/README.md" />
         <option value="$PROJECT_DIR$/src/Analysis/README.md" />
         <option value="$PROJECT_DIR$/src/Analysis/README.html" />
         <option value="$PROJECT_DIR$/src/SplitBasins/README.html" />
         <option value="$PROJECT_DIR$/src/README.html" />
+        <option value="$PROJECT_DIR$/src/Analysis/getSOData.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/USER_HOW-TO.txt" />
+        <option value="$PROJECT_DIR$/src/Analysis/HEC_Inundation_Config.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/getPeakData.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/getStageData.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/Compare_peakTimeElev.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/HEC_Inundation.py" />
+        <option value="$PROJECT_DIR$/src/dummyStorageOutflowCurves.py" />
+        <option value="$PROJECT_DIR$/src/hecModel.py" />
+        <option value="$PROJECT_DIR$/src/createStorageOutflowCurves.py" />
+        <option value="$PROJECT_DIR$/src/copyStorageOutflowCurves.py" />
+        <option value="$PROJECT_DIR$/src/SplitBasins/InitHMS.py" />
+        <option value="$PROJECT_DIR$/src/runModel.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/Compare_StorageOutflow.py" />
+        <option value="$PROJECT_DIR$/src/parent_hecConfig_USC.py" />
+        <option value="$PROJECT_DIR$/src/runModel.cmd" />
+        <option value="$PROJECT_DIR$/src/MPDT_revised_hecConfig.py" />
+        <option value="$PROJECT_DIR$/src/OLCRHMS_hecConfig.py" />
+        <option value="$PROJECT_DIR$/src/STCR_combined_hecConfig.py" />
+        <option value="$PROJECT_DIR$/src/parent_hecConfig.py" />
+        <option value="$PROJECT_DIR$/src/Analysis/Compare_Config.py" />
       </list>
     </option>
   </component>
@@ -173,10 +200,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -225,6 +252,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -296,8 +325,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -324,9 +351,6 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\nschiff2\IdeaProjects\AutoHEC\src\Analysis" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nschiff2\IdeaProjects\AutoHEC\src\Analysis" />
       <recent name="C:\Users\nschiff2\IdeaProjects\AutoHEC\src" />
@@ -334,26 +358,11 @@
       <recent name="C:\Users\nschiff2\IdeaProjects\AutoHEC\src\WeRunFirst\unused" />
       <recent name="C:\Users\nschiff2\IdeaProjects\AutoHEC\src\not_used" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nschiff2\IdeaProjects\AutoHEC\src\Analysis" />
+    </key>
   </component>
-  <component name="RunManager" selected="Batch.runModel">
-    <configuration default="false" name="Compare_StorageOutflow" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/WeRunFirst" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="AutoHEC" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/WeRunFirst/Compare_StorageOutflow.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.Compare_peakTimeElev (1)">
     <configuration default="false" name="runModel" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\nschiff2\IdeaProjects\AutoHEC\src" />
@@ -414,6 +423,24 @@
       <module name="AutoHEC" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Analysis/Compare_hydrographs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="InitHMS" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/SplitBasins" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AutoHEC" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/SplitBasins/InitHMS.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -1100,19 +1127,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.Compare_StorageOutflow" />
-      <item index="1" class="java.lang.String" itemvalue="Batch.runModel" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Compare_StorageOutflow (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Compare_peakTimeElev (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Compare_hydrographs" />
+      <item index="0" class="java.lang.String" itemvalue="Batch.runModel" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Compare_StorageOutflow (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Compare_peakTimeElev (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Compare_hydrographs" />
+      <item index="4" class="java.lang.String" itemvalue="Python.InitHMS" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Batch.runModel" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Compare_hydrographs" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Compare_peakTimeElev (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Compare_peakTimeElev (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Batch.runModel" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Compare_hydrographs" />
         <item index="3" class="java.lang.String" itemvalue="Python.Compare_StorageOutflow (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Compare_StorageOutflow" />
+        <item index="4" class="java.lang.String" itemvalue="Python.InitHMS" />
       </list>
     </recent_temporary>
   </component>
@@ -1150,7 +1177,8 @@
       <workItem from="1461258762400" duration="14069000" />
       <workItem from="1461333453656" duration="2468000" />
       <workItem from="1461346814275" duration="601000" />
-      <workItem from="1461347733425" duration="228000" />
+      <workItem from="1461347733425" duration="917000" />
+      <workItem from="1461585737618" duration="47018000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1461179879479</created>
@@ -1164,39 +1192,45 @@
       <option name="project" value="LOCAL" />
       <updated>1461333342305</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Substantially updated documentation. Split user and developer notes into USER_HOW-TO.txt and README.txt.">
+      <created>1461348004452</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1461348004452</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="356014000" />
+    <option name="totallyTimeSpent" value="403721000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32780084" sideWeight="0.5063966" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3564464" sideWeight="0.510661" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32780084" sideWeight="0.4936034" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780084" sideWeight="0.4914712" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3564464" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987553" sideWeight="0.4936034" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14072494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32694152" sideWeight="0.4914712" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38336715" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34178498" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286004" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38336715" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1213,24 +1247,25 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Mostly documentation updates and reorganization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mostly documentation updates and reorganization" />
+    <MESSAGE value="Substantially updated documentation. Split user and developer notes into USER_HOW-TO.txt and README.txt." />
+    <option name="LAST_COMMIT_MESSAGE" value="Substantially updated documentation. Split user and developer notes into USER_HOW-TO.txt and README.txt." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/Analysis/HEC_Inundation.py</url>
-          <line>169</line>
+          <line>170</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/Analysis/HEC_Inundation.py</url>
-          <line>182</line>
+          <line>183</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/Analysis/HEC_Inundation.py</url>
-          <line>160</line>
+          <line>161</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
@@ -1243,66 +1278,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/SplitBasins/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SplitBasins/hecElements/Pdata_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SplitBasins/runInitHMS.cmd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.106471814">
-          <caret line="6" column="45" selection-start-line="5" selection-start-column="40" selection-end-line="6" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readme_optimatics.md">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.572695">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.024709303">
-          <caret line="5288" column="102" selection-start-line="5288" selection-start-column="80" selection-end-line="5288" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/matplotlib/collections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="805" column="0" selection-start-line="805" selection-start-column="0" selection-end-line="805" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SplitBasins/hecElements/Subbasin_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67784256">
-          <caret line="103" column="57" selection-start-line="103" selection-start-column="57" selection-end-line="103" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SplitBasins/hecElements/Element_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.92565596">
@@ -1346,9 +1321,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/hecConfig.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.94736844">
@@ -1357,32 +1329,14 @@
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/STCR.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.110210694">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-        </state>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$APPLICATION_PLUGINS_DIR$/python/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275864">
           <caret line="1793" column="0" selection-start-line="1793" selection-start-column="0" selection-end-line="1793" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/STCR_combined_hecConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5235008">
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MEDT_HMS_hecConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19286872">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1400,53 +1354,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/HEC_Inundation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SplitBasins/HEC_Inundation_out.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1559" column="0" selection-start-line="1559" selection-start-column="0" selection-end-line="1559" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parent_hecConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/HEC_Inundation_Config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dummyStorageOutflowCurves.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/runModel.cmd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SplitBasins/getStageData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23349437">
-          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1457,67 +1368,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hecModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/runModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SplitBasins/InitHMS.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="42" selection-start-line="119" selection-start-column="42" selection-end-line="119" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/USC_hecConfig.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/copyStorageOutflowCurves.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39039665">
-          <caret line="22" column="84" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/createStorageOutflowCurves.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="82" selection-start-line="138" selection-start-column="82" selection-end-line="138" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/getPeakData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="104" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/getSOData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84863126">
-          <caret line="55" column="11" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parent_hecConfig_USC.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1528,24 +1382,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_hydrographs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_peakTimeElev.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="115" column="4" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Analysis/README.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.12014134">
@@ -1553,6 +1390,9 @@
           </first_editor>
           <second_editor />
         </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Analysis/README.html">
@@ -1564,9 +1404,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SplitBasins/README.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.15017667">
@@ -1574,6 +1411,9 @@
           </first_editor>
           <second_editor />
         </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SplitBasins/README.html">
@@ -1585,9 +1425,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/README.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor vertical-scroll-proportion="0.12014134">
@@ -1596,34 +1433,14 @@
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_StorageOutflow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.014492754">
-          <caret line="128" column="64" selection-start-line="128" selection-start-column="11" selection-end-line="128" selection-end-column="64" />
-        </state>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/README.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.3428574">
           <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_Config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Analysis/README.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1640,6 +1457,242 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/getSOData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34596375">
+          <caret line="49" column="25" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.045307443">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/USER_HOW-TO.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="70" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/getStageData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/HEC_Inundation_Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="107" selection-start-line="25" selection-start-column="107" selection-end-line="25" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/HEC_Inundation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/getPeakData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7772277">
+          <caret line="62" column="12" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_peakTimeElev.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.0115511">
+          <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hecModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="114" selection-start-line="43" selection-start-column="114" selection-end-line="43" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dummyStorageOutflowCurves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="118" selection-start-line="19" selection-start-column="118" selection-end-line="19" selection-end-column="118" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SplitBasins/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/createStorageOutflowCurves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="176" column="16" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
+          <folding>
+            <element signature="e#33#66#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/STCR.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11221122">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/copyStorageOutflowCurves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="11" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SplitBasins/InitHMS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="159" column="26" selection-start-line="159" selection-start-column="26" selection-end-line="159" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_StorageOutflow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/runModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="e#74#102#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parent_hecConfig_USC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LDDT_HMS_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LUDT_Design_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MEDT_HMS_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MPDT_revised_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/STCR_combined_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OLCRHMS_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/runModel.cmd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parent_hecConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_hydrographs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="45" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Analysis/Compare_Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.819788">
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
           <folding />
         </state>
       </provider>

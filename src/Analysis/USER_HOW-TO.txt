@@ -28,7 +28,7 @@ or viewing in Excel.
    Node Names in the table (under Options menu in the Profile Output
    Table of HEC-RAS).**
 2. Open Windows Command Prompt.
-3. Change to directory containing runInitHMS.cmd (AutoHEC/src/WeRunFirst)
+3. Change to directory containing runInitHMS.cmd (AutoHEC/src/Analysis)
    directory ("dir" lists directory contents and "cd" changes directory).
 4. Type "runHEC_Inundation.cmd" into the Windows command line and press Enter.
    Output will be saved to HEC_Inundation_output.txt.

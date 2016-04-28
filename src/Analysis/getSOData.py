@@ -48,7 +48,7 @@ for v in range(len(bVersions)):
     dssFiles = []
     dataDict = {}
     for j in dssFileName:
-        dataToGet.append(["//*/STORAGE-FLOW///TABLE/", "storageoutflow_V" + v + "optim"])
+        dataToGet.append(["//*/STORAGE-FLOW///TABLE/", "storageoutflow_V" + cV])
         dssFiles.append(versionPath + cV + j)
     for i in range(len(dataToGet)):
         dssFile = HecDss.open(dssFiles[i], True)

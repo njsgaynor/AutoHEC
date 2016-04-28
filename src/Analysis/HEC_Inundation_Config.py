@@ -11,11 +11,22 @@ class BankStation_config:
     def __init__(self):
         ## When preparing the bank station elevations file, do not include Node Names in the table (under
         ## Options menu in the Profile Output Table of HEC-RAS).
-        self.version = "2.0"
-        self.bankFileName = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/StonyCreek_banks2.csv" # "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_banks2.csv"
-        self.filePath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/Stony_V" + self.version + "/" #"G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_V4.0/"
-        self.dataPath = self.filePath + "HydraulicModels/ExistingConditions/STCR/STCR_DesignRuns/"
-        self.dssFileName = self.dataPath + "STCR_Design2.dss" #"Base_and_Calibration.dss"
-        self.outFileName = self.filePath + "OOB_StonyCreek_V" + self.version + ".csv" #"OOB_USC.csv"
-        self.runName = "100YR24HRISWS" #"HUFFQII_100YR12H" #"ILREVEXIMP040512" #
-        self.startDate = "01DEC2006" #"01DEC2007" #
+        # STCR options
+        # self.version = "2.0"
+        # self.bankFileName = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/StonyCreek_banks2.csv"
+        # self.filePath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/Stony_V" + self.version + "/"
+        # self.dataPath = self.filePath + "HydraulicModels/ExistingConditions/STCR/STCR_DesignRuns/"
+        # self.dssFileName = self.dataPath + "STCR_Design2.dss"
+        # self.outFileName = self.filePath + "OOB_StonyCreek_V" + self.version + ".csv"
+        # self.runName = "100YR24HRISWS" #"HUFFQII_100YR12H" #
+        # self.startDate = "01DEC2006"
+
+        # USC options
+        self.version = "3.0optim"
+        self.bankFileName = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_banks2.csv" #CSV file
+        self.filePath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_V" + self.version + "/"
+        self.dataPath = self.filePath
+        self.dssFileName = self.dataPath + "Base_and_Calibration.dss"
+        self.outFileName = self.filePath + "OOB_USC_V" + self.version + ".csv"
+        self.runName = "ILREVEXIMP040512"
+        self.startDate = "01DEC2007"

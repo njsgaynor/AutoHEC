@@ -27,7 +27,6 @@ class Model:
 
     # Implements step 7 of the brief workflow description
     def newStorageOutflowCurves(self):
-        print('creating new rating curves')
         popd=os.getcwd()
         os.chdir(self.config.dssDir)
 
@@ -42,9 +41,7 @@ class Model:
         pickle.dump(tableNames, dtf)
         dtf.close()
 
-        print("call dummy curves")
         call([self.config.dssCommand, "-s", self.config.scriptPath + "/dummyStorageOutflowCurves.py"], shell=True)
-        print("end call dummy curves")
         os.chdir(popd)
 
     # Implements step 10 of the brief workflow description

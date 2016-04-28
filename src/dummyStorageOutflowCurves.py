@@ -17,6 +17,7 @@ import hecConfig
 reload(hecConfig)
 config = hecConfig.HecConfig()
 
+print("Creating and inserting dummy storage-outflow curves for redeveloped subbasins in " + config.hmsProjectName + "...")
 try:
     dtf = open(config.getDataTransferFilePath(),'r+')
     tableList = pickle.load(dtf)

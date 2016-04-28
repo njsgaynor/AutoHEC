@@ -18,12 +18,14 @@ import os
 
 def getData():
     """Get data from a DSS file"""
+    print("getData")
     popd=os.getcwd()
     dssvuePath = "C:/Program Files (x86)/HEC/HEC-DSSVue/"
     os.chdir(dssvuePath)
     # Path to scritp that extracts data from DSS file
-    scriptPath = "C:/Users/nschiff2/IdeaProjects/AutoHEC/src/WeRunFirst/"
+    scriptPath = "C:/Users/nschiff2/IdeaProjects/AutoHEC/src/Analysis/"
     # Use HEC-DSSVue to run script (only way to use hec package that accesses DSS files)
+    print("HEC-DSSVue.cmd", "-s", scriptPath + "getStageData.py")
     call(["HEC-DSSVue.cmd", "-s", scriptPath + "getStageData.py"], shell=True)
     os.chdir(popd)
 
@@ -37,12 +39,12 @@ def roundSigfigs(num, sigfigs):
         return str(0.0)  # Can't take the log of 0
 
 def getTimeStage(dataPath):
-    print("getTimeStage")
+    print("Reading stage time series data from text file and get rid of interpolated stations...")
     timestage = pickle.load(open(dataPath + "timestage.txt", 'rb'))
     # For every item in timestage (each station in Stony Creek), keep the data only if it is not an interpolated
     # station. The station ID is the second item in the data address.
     keyList = timestage.keys()
-    print("timestage:", len(timestage))
+    print("Length of stage time series dataset before culling interpolated stations: " + str(len(timestage)))
     for key in keyList:
         # Extract station ID from data address in DSS file
         u = key.split('/')
@@ -61,7 +63,7 @@ def getTimeStage(dataPath):
     return timestage
 
 def getBankElevations(bankFile):
-    print("getBankElevations")
+    print("Reading bank elevations data from CSV file and get rid of interpolated stations...")
     # Open CSV file that contains the bank station elevations for each station in the Stony Creek watershed and read whole
     # file into a list.
     #   The CSV was copy-pasted from HEC-RAS (Profile output table) to Excel (data and headers) and saved as a CSV file.
@@ -69,7 +71,7 @@ def getBankElevations(bankFile):
     #   not available in HEC-DSSVue.
     with open(bankFile, 'rb') as csvfile:
         bank = list(csv.reader(csvfile, delimiter=','))
-        print('bank ',len(bank))   #used for debugging
+        print('Length of bank station dataset before culling interpolated stations: ' + str(len(bank)))   #used for debugging
         # For every column in bank (each station in Stony Creek), keep the data only if it is not an interpolated station.
         #   The first three elements are river, reach, and station ID. Station ID needs to be converted to a float.
         #   Then concatenate river and reach into a single, uppercase element and assign to element 1.
@@ -93,12 +95,13 @@ def getBankElevations(bankFile):
         return bankDict
 
 def getMaxStage(timestage, dataPath):
-    print("getMaxStage")
+    print("Reading max stage data from text file and get rid of interpolated stations...")
     maxstage = pickle.load(open(dataPath + "maxstage.txt", 'rb'))
     # For every item in maxstage (each station in Stony Creek), keep the data only if it is not an interpolated
     # station. The station ID is the second item in the data address. Timestage is used as the reference standard
     # for which stations to keep.
     keyList = maxstage.keys()
+    print("Length of max stage dataset before culling interpolated stations: " +  str(len(maxstage)))
     for key in keyList:
         # Extract station ID from data address in DSS file
         u = key.split('/')
@@ -109,27 +112,25 @@ def getMaxStage(timestage, dataPath):
             maxstage[newKey] = maxstage.pop(key)
         else:  # if station ID is interpolated
             maxstage.pop(key)
-            print("Pop maxstage:", newKey)
+            print("Popping station:", newKey)
     return maxstage
 
 def checkInputs(bank, timestage, maxstage):  # Mainly for debugging
-    print("checkInputs")
     # Debug which stations don't match between maxstage, bank, and timestage
     for y in maxstage:
         if(not bank.has_key(y)):
-            print("bank", y)
+            print("Error: No key ", y, " in list of bank stations.")
         if(not timestage.has_key(y)):
-            print("bank", y)
+            print("Error: No key ", y, " in time series of stage data.")
         #assert bank.has_key(y)
         #assert timestage.has_key(y)
         pass
     # Used to check that each data set has the same number of stations (debugging)
-    print('maxstage ',len(maxstage))
-    print('timestage ',len(timestage))
-    print('bank ',len(bank))
+    print('Length of max stage dataset after culling interpolated stations: ' + str(len(maxstage)))
+    print('Length of stage time series dataset after culling interpolated stations: ' + str(len(timestage)))
+    print('Length of bank station dataset after culling interpolated stations: ' + str(len(bank)))
 
 def match_stations(config):
-    print("match_stations")
     timestage = getTimeStage(config.dataPath)
     bank = getBankElevations(config.bankFileName)
     maxstage = getMaxStage(timestage, config.dataPath)
@@ -158,7 +159,7 @@ def OOB_DepthTime(bank, timestage, maxstage):
         try:
             OOB_depth = round(float(maxstage[item])-lowbank, 4)
         except KeyError:
-            print("Key Error in maxstage: ", str(item))
+            print("Key Error in max stage dataset: ", str(item))
         if (not OOB_depth < 0):
             overflow[count+1][2] = OOB_depth
         else:
@@ -189,7 +190,7 @@ def OOB_DepthTime(bank, timestage, maxstage):
     return overflow
 
 def writeOOB_DepthTime(outFile, overflow):
-    print("writeOOB_DepthTime")
+    print("Writing out-of-banks depth and time to CSV file " + outFile + "...")
     if(os.path.isfile(outFile)):
         os.remove(outFile)
     else:
@@ -199,7 +200,7 @@ def writeOOB_DepthTime(outFile, overflow):
             writer.writerows(overflow)
 
 # Used to look at state of variables for debugging
-print('done')
+print('HEC_Inundation is done running.')
 
 def main():
     getData()
@@ -207,9 +208,6 @@ def main():
     maxstage, timestage, bank = match_stations(config)
     overflow = OOB_DepthTime(bank, timestage, maxstage)
     writeOOB_DepthTime(config.outFileName, overflow)
-    print(len(maxstage))
-    print(len(timestage))
-    print(len(bank))
 
 if __name__ == '__main__':
     main()

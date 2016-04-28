@@ -4,10 +4,9 @@ from hec.heclib.dss import HecDss
 
 def getStorageOutflowCurve(tableName, soPaths, soDss):
     u = tableName.split("_")
+    print(tableName)
 
     for p in soPaths:
-        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-        print(tableName)
         if (len(u[0]) > 1) and (u[0].upper() in p.upper()):
             try:
                 float(u[1])
@@ -30,6 +29,7 @@ def getStorageOutflowCurve(tableName, soPaths, soDss):
 # in step 6 of the example workflow)
 def writeTable(tableName, storage, outflowRates):
     """Write a storage curve to the DSS file"""
+    print("Writing table " + tableName + " to DSS file...")
     storageOutflowCurve = dss.get(tableName)
     storageOutflowCurve.xOrdinates = storage
     storageOutflowCurve.yOrdinates = [outflowRates]
@@ -42,8 +42,10 @@ def writeTable(tableName, storage, outflowRates):
 import hecConfig
 reload(hecConfig)
 config = hecConfig.HecConfig()
-dssFilePath = config.getHmsProjectPath() + "/" + config.hmsProjectName + ".dss"
-dss = HecDss.open(dssFilePath)
+#dssFilePath = config.getHmsProjectPath() + "/" + config.hmsProjectName + ".dss"
+print("write DSS file: " + config.dssfile)
+print("read DSS file: " + config.osDssFile)
+dss = HecDss.open(config.dssfile)
 soDss = HecDss.open(config.osDssFile)
 
 

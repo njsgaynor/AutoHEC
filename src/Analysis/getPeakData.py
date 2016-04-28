@@ -60,6 +60,7 @@ for j in range(len(dataToGet)):
                 splitPath[2] = str(roundSigfigs(dataLocation, 7))
                 fullLoc = "/".join(splitPath)
                 dataDict.update({fullLoc: dataValue})
+    print("Saving " + filePath + dataToGet[j][1] + ".txt")
     outFile = open(filePath + dataToGet[j][1] + ".txt", 'wb')
     pickle.dump(dataDict, outFile)
     outFile.close()
