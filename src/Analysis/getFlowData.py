@@ -16,18 +16,13 @@ config = CompareConfig()
 filePath = config.filePath  #G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/
 versionPath = config.versionPath  #Stony_V
 dssFileName = config.dssRasFileName  #/HydraulicModels/ExistingConditions/STCR/STCR_DesignRuns/STCR_Design2.dss
-bVersions = config.baseVersions  #"1.0", "2.0", etc.
-cVersions = config.compareVersions  #"1.0", "2.0", etc.
+versions = config.versions
 
 dataToGet = []
 dssFiles = []
-for i in range(len(bVersions)):
-    bV = bVersions[i]
-    cV = cVersions[i]
-    dataToGet.append(["FLOW/" + config.startDate + "/*", "hydrograph_V" + bV])
-    dssFiles.append(versionPath + bV + dssFileName)
-    dataToGet.append(["FLOW/" + config.startDate + "/*", "hydrograph_V" + cV])
-    dssFiles.append(versionPath + cV + dssFileName)
+for v in versions:
+    dataToGet.append(["FLOW/" + config.startDate + "/*", "hydrograph_V" + v])
+    dssFiles.append(versionPath + v + dssFileName)
 for i in range(len(dataToGet)):
     dssFile = HecDss.open(dssFiles[i], True)
     pathNames = dssFile.getCatalogedPathnames("/*/*/" + dataToGet[i][0] + "/" + config.rasRunName + "/")
@@ -37,7 +32,7 @@ for i in range(len(dataToGet)):
         try:
             dataList = list(dataFromFile.values)
             dataDict.update({pathNames[item]: dataList})
-        except:
+        except Exception, e:
             for loc in range(len(dataFromFile.xOrdinates)):
                 dataLocation = dataFromFile.xOrdinates[loc]#[:8]
                 dataValue = dataFromFile.yOrdinates[0][loc]#[:8]
