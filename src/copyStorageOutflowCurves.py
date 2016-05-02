@@ -36,6 +36,16 @@ def writeTable(tableName, storage, outflowRates):
     storageOutflowCurve.numberOrdinates = len(storage)
     dss.put(storageOutflowCurve)
 
+def recordTotalStorage(storage, subbasin, totStorage):
+    totStorage[subbasin] = storage[-1]
+    return totStorage
+
+def writeTotalStorage(totStorage, fileName, filePath):
+    csvfile = open(filePath + fileName + "_storage.csv", 'wb')
+    for k in totStorage.keys():
+        csvfile.write(k + ", " + str(totStorage[k]) + "\n")
+    csvfile.close()
+
 
 # obtain configuration details for HEC applications for
 # python and jython scripts
@@ -54,6 +64,7 @@ import pickle
 dtf = open(config.getDataTransferFilePath(),'r+')
 subbasins = pickle.load(dtf)
 dtf.close()
+totStorage = {}
 
 acresPerSqMile = 640
 
@@ -64,6 +75,8 @@ for subbasin in subbasins:
         soPath = "//*MWRD*/STORAGE-FLOW///TABLE/"
         soPathsAll = soDss.getCatalogedPathnames(soPath)
         outflowRates, storage = getStorageOutflowCurve(subbasin['tableName'], soPathsAll, soDss)
+        totStorage = recordTotalStorage(storage, subbasin['name'], totStorage)
         writeTable("//" + subbasin['tableName'] + "/STORAGE-FLOW///TABLE/", storage, outflowRates)
+writeTotalStorage(totStorage, config.hmsProjectName, config.modelVersion)
 
 dss.done()

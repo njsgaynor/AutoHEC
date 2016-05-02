@@ -1,7 +1,7 @@
 # Create storage-outflow curves
 
 from hec.heclib.dss import HecDss
-from pprint import pprint
+import csv
 
 def indexOfMaxValue(hydrograph):
     """returns the index of the largest entry in the given hydrograph"""
@@ -172,6 +172,16 @@ def writeTable(tableName, storage, outflowRates):
     storageOutflowCurve.numberOrdinates = len(storage)
     dss.put(storageOutflowCurve)
 
+def recordTotalStorage(storage, subbasin, totStorage):
+    totStorage[subbasin] = storage[-1]
+    return totStorage
+
+def writeTotalStorage(totStorage, fileName, filePath):
+    csvfile = open(filePath + fileName + "_storage.csv", 'wb')
+    for k in totStorage.keys():
+        csvfile.write(k + ", " + str(totStorage[k]) + "\n")
+    csvfile.close()
+
 # obtain configuration details for HEC applications for
 # python and jython scripts
 import hecConfig
@@ -190,12 +200,15 @@ dtf.close()
 acresPerSqMile = 640
 intervalNum = config.intervalNum
 print("Time step is " + str(intervalNum) + " minutes")
+totStorage = {}
 
 # Build and save the outflow-storage curve for each sub basin
 for subbasin in subbasins:
     if not subbasin['tableName'] == '':
         #print(subbasin['area'])
         outflowRates, storage = buildStorageOutflowCurve(subbasin['name'], subbasin['area'] * acresPerSqMile, subbasin['releaseRate'], intervalNum)
+        totStorage = recordTotalStorage(storage, subbasin['name'], totStorage)
         writeTable("//"+ subbasin['tableName'] + "/STORAGE-FLOW///TABLE/", storage, outflowRates)
+writeTotalStorage(totStorage, config.hmsProjectName, config.modelVersion)
 
 dss.done()
