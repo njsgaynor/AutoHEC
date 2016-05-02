@@ -16,52 +16,28 @@ config = CompareConfig()
 filePath = config.filePath  #G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/
 versionPath = config.versionPath  #Stony_V
 dssFileName = config.dssHmsFileName # [self.dssHmsFilePath + "LucasDitch/LUDT_DesignRuns/LUDT_Design.dss", etc.
-bVersions = config.baseVersions  #"1.0", "2.0", etc.
-cVersions = config.compareVersions  #"1.0", "2.0", etc.
+versions = config.versions
 
-for v in range(len(bVersions)):
-    bV = bVersions[v]
-    cV = cVersions[v]
-    dataToGet = []
-    dssFiles = []
-    dataDict = {}
+dataToGet = []
+dssFiles = []
+dataDict = {}
+for v in versions:
     for j in dssFileName:
-        dataToGet.append(["//*/STORAGE-FLOW///TABLE/", "storageoutflow_V" + bV])
-        dssFiles.append(versionPath + bV + j)
-    for i in range(len(dataToGet)):
-        dssFile = HecDss.open(dssFiles[i], True)
-        pathNames = dssFile.getCatalogedPathnames(dataToGet[i][0])
-        for item in range(len(pathNames)):
-            dataFromFile = dssFile.get(pathNames[item], True)
-            try:
-                dataList = [list(dataFromFile.xOrdinates), list(dataFromFile.yOrdinates[0])]
-                dataDict.update({pathNames[item]: dataList})
-                #print("added", pathNames[item])
-            except:
-                print("didn't work")
+        dataToGet.append(["//*/STORAGE-FLOW///TABLE/", "storageoutflow_V" + v])
+        dssFiles.append(versionPath + v + j)
+for i in range(len(dataToGet)):
+    dssFile = HecDss.open(dssFiles[i], True)
+    pathNames = dssFile.getCatalogedPathnames(dataToGet[i][0])
+    for item in range(len(pathNames)):
+        dataFromFile = dssFile.get(pathNames[item], True)
+        try:
+            dataList = [list(dataFromFile.xOrdinates), list(dataFromFile.yOrdinates[0])]
+            dataDict.update({pathNames[item]: dataList})
+        except Exception, e:
+            print("Could not retrieve storage-outflow data: " + dataToGet[i][0])
+    try:
         outFile = open(filePath + dataToGet[i][1] + ".txt", 'wb')
-        print(dataDict.keys())
-        pickle.dump(dataDict, outFile)
-        outFile.close()
-
-    dataToGet = []
-    dssFiles = []
-    dataDict = {}
-    for j in dssFileName:
-        dataToGet.append(["//*/STORAGE-FLOW///TABLE/", "storageoutflow_V" + cV])
-        dssFiles.append(versionPath + cV + j)
-    for i in range(len(dataToGet)):
-        dssFile = HecDss.open(dssFiles[i], True)
-        pathNames = dssFile.getCatalogedPathnames(dataToGet[i][0])
-        for item in range(len(pathNames)):
-            dataFromFile = dssFile.get(pathNames[item], True)
-            try:
-                dataList = [list(dataFromFile.xOrdinates), list(dataFromFile.yOrdinates[0])]
-                dataDict.update({pathNames[item]: dataList})
-                #print("added", pathNames[item])
-            except:
-                print("didn't work")
-        outFile = open(filePath + dataToGet[i][1] + ".txt", 'wb')
-        print(dataDict.keys())
-        pickle.dump(dataDict, outFile)
-        outFile.close()
+    except Exception, e:
+        print(e, "Invalid file name?")
+    pickle.dump(dataDict, outFile)
+    outFile.close()
