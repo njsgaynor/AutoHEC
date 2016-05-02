@@ -74,7 +74,9 @@ def plotLines(filePath, plotData, figName, versions):
     lineWidths = [2, 1, 2, 1, 1]
     plotLine = versions[:]
     for v in range(len(versions)):
-        plotLine[v], = pyplot.plot(range(len(plotData[versions[v]][figName])), plotData[versions[v]][figName], lineColors[v], lw=lineWidths[v], Label=versions[v])
+        plotLine[v], = pyplot.plot(range(len(plotData[versions[v]][figName])),
+                                   plotData[versions[v]][figName], lineColors[v],
+                                   lw=lineWidths[v], Label=versions[v])
     pyplot.legend(plotLine, versions)
     #pyplot.legend(handles=[manualLine, autoLine])
     pyplot.ylabel('Flow (cfs)')

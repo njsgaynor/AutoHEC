@@ -29,10 +29,8 @@ class CompareConfig:
 
         ## Global options
         self.dataPath = ""  #not currently used
-        # baseVersions and compareVersions must be the same length
-        self.baseVersions = ["4.0"] #"8.0","9.0","11.0"]
-        self.compareVersions = ["4.0optim"] #"8.0optim","9.0optim","11.0optim"]
+        # Model versions to analyze
         # --first item is considered the base model
         # --max of 5 for now
         # --cannot use a non-redeveloped model as the first model when plotting rating curves
-        self.versions = ["6.1", "7.0", "10.0", "13.0"] #first item is considered the base model; max of 5 for now
+        self.versions = ["1.0", "6.1", "7.0", "10.0", "13.0"]
