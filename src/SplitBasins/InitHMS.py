@@ -48,7 +48,7 @@ def copyFiles(ws, metFile):
         shutil.copyfile(metFile, metFile + ".backup")
 
 
-def readBasinFile(ws, scriptPath):
+def readBasinFile(ws, scriptPath, modelVersion):
     from hecElements.Basin_class import Basin
     from hecElements.Subbasin_class import Subbasin
     from hecElements.Junction_class import Junction
@@ -68,6 +68,11 @@ def readBasinFile(ws, scriptPath):
     print(subbasinFile)
     # Make backup of *.pdata file
     shutil.copyfile(ws['pdatafile'], pdatabackup)
+    altRRfile = open(modelVersion + "alt_RR_basins.txt", 'rb')
+    altRRlist = altRRfile.readlines()
+    altRRfile.close()
+    altRRlist[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist]
+    print altRRlist
     # Read elements from *.basin file and split the subbasins; write to new *.basin file
     # Also create list of table names (txt) and and subbasins/release rates (JSON) and write to files for later use
     with open(ws['basinin'], 'rb') as basinsrc, open(ws['basinout'], 'wb') as basinsink, open(ws['pdatafile'], 'ab') \
@@ -90,11 +95,16 @@ def readBasinFile(ws, scriptPath):
                     b = Basin.readBasin(currentLine, basinsrc, basinsink)
                 elif currentLine.startswith('Subbasin:'):
                     b, b2, soname = Subbasin.readSubbasin(currentLine, basinsrc, basinsink, ws['redevelopment'],
-                                                      ws['curvenumber'], ws['releaserate'])
-                    tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaserate']])
+                                                      ws['curvenumber'], ws['releaserate'], altRRlist, ws['releaseratealt'])
+                    if b.getIdentifier() in altRRlist:
+                        tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaseratealt']])
+                        sbAll.newItem(b.getIdentifier(), float(ws['releaseratealt']), b.area.getAsFloat(), '')
+                        sbAll.newItem(b2.getIdentifier(), float(ws['releaseratealt']), b2.area.getAsFloat(), soname)
+                    else:
+                        tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaserate']])
+                        sbAll.newItem(b.getIdentifier(), float(ws['releaserate']), b.area.getAsFloat(), '')
+                        sbAll.newItem(b2.getIdentifier(), float(ws['releaserate']), b2.area.getAsFloat(), soname)
                     Pdata.newPdata(soname, pdatasink, ws['dssfile'])
-                    sbAll.newItem(b.getIdentifier(), float(ws['releaserate']), b.area.getAsFloat(), '')
-                    sbAll.newItem(b2.getIdentifier(), float(ws['releaserate']), b2.area.getAsFloat(), soname)
                 elif currentLine.startswith('Junction:'):
                     b = Junction.readJunction(currentLine, basinsrc, basinsink)
                 elif currentLine.startswith('Reservoir:'):
@@ -158,7 +168,7 @@ def main(config):
     metFile = config.hmsMetFile + ".met"
     ws = Subwatershed(config)
     copyFiles(ws, metFile)
-    tableList, subbasinList = readBasinFile(ws, config.scriptPath)
+    tableList, subbasinList = readBasinFile(ws, config.scriptPath, config.modelVersion)
     stationList = readList(config.stationFileName)
     writeJsonInput(subbasinList, stationList, config.inputFileName)
     modMetFile(metFile, config.hmsGageName, tableList)

@@ -17,8 +17,8 @@ class HecConfig:
         # ["LUDT_Design", "LDDT_HMS", "MEDT_HMS", "MPDT_revised", "OLCRHMS", "STCR_combined"]
 
         self = parent_hecConfig.setme2(self)
-        self.hmsMetFile = self.hmsProjectPath + "/100yr12hrHuff"
-        self.hmsGageName = "100yr12hrHuff"
+        # self.hmsMetFile = self.hmsProjectPath + "/100yr12hrHuff"
+        # self.hmsGageName = "100yr12hrHuff"
         self.basinin = self.hmsProjectPath + "/MPDT_levelpool - Copy.basin"
         self.basinout = self.hmsProjectPath + "/MPDT_levelpool.basin"
 

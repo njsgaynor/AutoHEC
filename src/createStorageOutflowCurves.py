@@ -1,7 +1,6 @@
 # Create storage-outflow curves
 
 from hec.heclib.dss import HecDss
-import csv
 
 def indexOfMaxValue(hydrograph):
     """returns the index of the largest entry in the given hydrograph"""
