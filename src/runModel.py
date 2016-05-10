@@ -26,6 +26,11 @@ for s in subsubwatersheds:
     import hecConfig
     reload(hecConfig)
     config = hecConfig.HecConfig()
+    try:
+        os.remove(config.modelVersion + "parent_hecConfig.py")
+    except Exception, e:
+        print("parent_hecConfig.py has never been copied for this model version.")
+    shutil.copyfile("parent_hecConfig.py", config.modelVersion + "parent_hecConfig.py")
     curdir = os.getcwd()
     os.chdir(config.scriptPath)
     #print(vars(config))

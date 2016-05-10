@@ -108,6 +108,10 @@ No known issues. (4/22/2016)
   findMaxReleaseRateIndex and calculates the accumulated storage over this period
 --writeTable(tableName, storage, outflowRates): writes new storage-outflow table to the RAS
   DSS file
+--recordTotalStorage(storage, subbasin, totStorage): records the max storage from each storage-outflow
+  curve
+--writeTotalStorage(totStorage, fileName, filePath): writes total storage for each subbasin to a
+  CSV file named *_storage.csv stored in the model version directory
 
 # ExampleDssUsage.py #
 --description: shows how to access (read/write) data to DSS file

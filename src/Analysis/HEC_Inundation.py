@@ -11,19 +11,20 @@
 
 import csv
 import math
-from HEC_Inundation_Config import BankStation_config
+from Compare_Config import CompareConfig
 from subprocess import call
 import pickle
 import os
 
-def getData():
+def getData(version, scriptPath):
     """Get data from a DSS file"""
     print("getData")
     popd=os.getcwd()
     dssvuePath = "C:/Program Files (x86)/HEC/HEC-DSSVue/"
     os.chdir(dssvuePath)
-    # Path to scritp that extracts data from DSS file
-    scriptPath = "C:/Users/nschiff2/IdeaProjects/AutoHEC/src/Analysis/"
+    # Path to script that extracts data from DSS file
+    with open(scriptPath + "version.txt", 'wb') as vFile:
+        pickle.dump([version], vFile)
     # Use HEC-DSSVue to run script (only way to use hec package that accesses DSS files)
     print("HEC-DSSVue.cmd", "-s", scriptPath + "getStageData.py")
     call(["HEC-DSSVue.cmd", "-s", scriptPath + "getStageData.py"], shell=True)
@@ -38,9 +39,9 @@ def roundSigfigs(num, sigfigs):
     else:
         return str(0.0)  # Can't take the log of 0
 
-def getTimeStage(dataPath):
+def getTimeStage(filePath, version):
     print("Reading stage time series data from text file and get rid of interpolated stations...")
-    timestage = pickle.load(open(dataPath + "timestage.txt", 'rb'))
+    timestage = pickle.load(open(filePath + version + "timestage.txt", 'rb'))
     # For every item in timestage (each station in Stony Creek), keep the data only if it is not an interpolated
     # station. The station ID is the second item in the data address.
     keyList = timestage.keys()
@@ -94,9 +95,9 @@ def getBankElevations(bankFile):
             count += 1
         return bankDict
 
-def getMaxStage(timestage, dataPath):
+def getMaxStage(timestage, filePath, version):
     print("Reading max stage data from text file and get rid of interpolated stations...")
-    maxstage = pickle.load(open(dataPath + "maxstage.txt", 'rb'))
+    maxstage = pickle.load(open(filePath + version + "maxstage.txt", 'rb'))
     # For every item in maxstage (each station in Stony Creek), keep the data only if it is not an interpolated
     # station. The station ID is the second item in the data address. Timestage is used as the reference standard
     # for which stations to keep.
@@ -130,10 +131,10 @@ def checkInputs(bank, timestage, maxstage):  # Mainly for debugging
     print('Length of stage time series dataset after culling interpolated stations: ' + str(len(timestage)))
     print('Length of bank station dataset after culling interpolated stations: ' + str(len(bank)))
 
-def match_stations(config):
-    timestage = getTimeStage(config.dataPath)
-    bank = getBankElevations(config.bankFileName)
-    maxstage = getMaxStage(timestage, config.dataPath)
+def match_stations(filePath, bankFileName, version):
+    timestage = getTimeStage(filePath, version)
+    bank = getBankElevations(bankFileName)
+    maxstage = getMaxStage(timestage, filePath, version)
     checkInputs(bank, timestage, maxstage)  # Mainly for debugging
     return maxstage, timestage, bank
 
@@ -189,25 +190,27 @@ def OOB_DepthTime(bank, timestage, maxstage):
         count = count + 1
     return overflow
 
-def writeOOB_DepthTime(outFile, overflow):
-    print("Writing out-of-banks depth and time to CSV file " + outFile + "...")
-    if(os.path.isfile(outFile)):
-        os.remove(outFile)
-    else:
-        # Write overflow to a CSV file for further analysis or viewing in Excel
-        with open(outFile, 'wb') as output:
-            writer = csv.writer(output)
-            writer.writerows(overflow)
+def writeOOB_DepthTime(outFile, overflow, version):
+    outFileName = outFile + version + ".csv"
+    print("Writing out-of-banks depth and time to CSV file " + outFileName + "...")
+    if(os.path.isfile(outFileName)):
+        os.remove(outFileName)
+    # Write overflow to a CSV file for further analysis or viewing in Excel
+    with open(outFileName, 'wb') as output:
+        writer = csv.writer(output)
+        writer.writerows(overflow)
 
 # Used to look at state of variables for debugging
 print('HEC_Inundation is done running.')
 
-def main():
-    getData()
-    config = BankStation_config()
-    maxstage, timestage, bank = match_stations(config)
+def main(version):
+    config = CompareConfig()
+    getData(version, config.scriptPath)
+    maxstage, timestage, bank = match_stations(config.versionPath, config.bankFileName, version)
     overflow = OOB_DepthTime(bank, timestage, maxstage)
-    writeOOB_DepthTime(config.outFileName, overflow)
+    writeOOB_DepthTime(config.inundOutFileName, overflow, version)
 
 if __name__ == '__main__':
-    main()
+    config = CompareConfig()
+    for v in config.versions:
+        main(v)

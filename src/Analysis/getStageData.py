@@ -3,7 +3,7 @@ sys.path.append("C:/Users/nschiff2/IdeaProjects/AutoHEC/src/Analysis/")
 
 from hec.heclib.dss import HecDss
 import pickle
-from HEC_Inundation_Config import BankStation_config
+from Compare_Config import CompareConfig
 
 # Read in hourly (or other periodic) STAGE data from HEC-RAS DSS file. Store data in a pickle file for further use.
 # Example of data paths:
@@ -12,16 +12,22 @@ from HEC_Inundation_Config import BankStation_config
 # .getCatalogedPathnames([path pattern]) retrieves all data addresses that match the pattern
 # .get([file path], True) returns data from all dates
 
-config = BankStation_config()
+config = CompareConfig()
 filePath = config.filePath
-dssFileName = config.dssFileName
-dataPath = config.dataPath
+dssFileName = config.dssRasFileName
+dataPath = config.versionPath
 
+print(config.scriptPath + "version.txt")
+vFile = open(config.scriptPath + "version.txt")
+vList = pickle.load(vFile)
+vFile.close()
+version = vList[0]
 dataToGet = [["STAGE/" + config.startDate + "/*", "timestage"], ["LOCATION-ELEV//MAX STAGE", "maxstage"],
              ["LOCATION-TIME//MAX STAGE", "peaktime"]]
-dssFile = HecDss.open(dssFileName, True)
+print(dataPath + version + dssFileName)
+dssFile = HecDss.open(dataPath + version + dssFileName, True)
 for i in range(len(dataToGet)):
-    pathNames = dssFile.getCatalogedPathnames("/*/*/" + dataToGet[i][0] + "/" + config.runName + "/")
+    pathNames = dssFile.getCatalogedPathnames("/*/*/" + dataToGet[i][0] + "/" + config.rasRunName + "/")
     dataDict = {}
     for item in range(len(pathNames)):
         dataFromFile = dssFile.get(pathNames[item], True)
@@ -36,7 +42,7 @@ for i in range(len(dataToGet)):
                 splitPath[2] = str(dataLocation)
                 fullLoc = "/".join(splitPath)
                 dataDict.update({fullLoc: dataValue})
-    print("Saving " + dataPath + dataToGet[i][1] + ".txt")
-    outFile = open(dataPath + dataToGet[i][1] + ".txt", 'wb')
+    print("Saving " + dataPath + version + dataToGet[i][1] + ".txt")
+    outFile = open(dataPath + version + dataToGet[i][1] + ".txt", 'wb')
     pickle.dump(dataDict, outFile)
     outFile.close()

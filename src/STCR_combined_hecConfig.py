@@ -17,7 +17,7 @@ class HecConfig:
         # ["LUDT_Design", "LDDT_HMS", "MEDT_HMS", "MPDT_revised", "OLCRHMS", "STCR_combined"]
 
         self = parent_hecConfig.setme2(self)
-        # self.hmsMetFile = self.hmsProjectPath + "/100yr12hrHuffARF"
+        self.hmsMetFile = self.hmsProjectPath + "/100yr12hrHuffARF"
         self.basinin = self.hmsProjectPath + "/STCR_comb_Huff - Copy.basin"
         self.basinout = self.hmsProjectPath + "/STCR_comb_Huff.basin"
 

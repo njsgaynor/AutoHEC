@@ -122,7 +122,7 @@ def buildStorageOutflowCurveFromHydrograph(inflowHydrograph, subBasinArea, allow
         maxReleaseRateIndex = findMaxReleaseRateIndex(inflowHydrograph, allowableReleaseRate)
 
         outflowCurveTimeSteps = maxReleaseRateIndex - inflowStartIndex + 1
-        outflowRates = [] # cfs
+        outflowRates = [0, 0.00001] # cfs
         timeStep = intervalNum * 60 # seconds
 
         # The storage accumulation is performed over the entire inflow curve, not just the period
@@ -130,30 +130,30 @@ def buildStorageOutflowCurveFromHydrograph(inflowHydrograph, subBasinArea, allow
         # storage array is actually the sum of (inflow * timeStep) up to the point where the
         # inflow rate crosses inflowStartThreshold.
         initialCumulativeStorage = timeStep * sum(inflowHydrograph.values[:inflowStartIndex-1])
-        cumulativeStorage = [initialCumulativeStorage] # cubic feet
+        cumulativeStorage = [0, initialCumulativeStorage] # cubic feet
 
         for i in range(0, outflowCurveTimeSteps + 1):
             x = i/float(outflowCurveTimeSteps)
-            outflowRate = x * allowableReleaseRate
+            outflowRate = (x * allowableReleaseRate) + 0.00001
             outflowRates.append(outflowRate)
-            inflowRate = inflowHydrograph.values[inflowStartIndex + i - 1]
+            inflowRate = inflowHydrograph.values[inflowStartIndex + i]# - 1]
             storageInCurrentTimestep = (inflowRate - outflowRate) * timeStep *1.01
             #print(i, inflowRate, outflowRate, allowableReleaseRate, outflowCurveTimeSteps)
 
-            if (i > 0) and (storageInCurrentTimestep < 0):
+            if (i > 0) and (storageInCurrentTimestep <= 0):
                 # the first timestep often has no inflow and no outflow, so we
                 # only perform this assertion in later timesteps
                 # this ensures that the storage is always increasing; HEC-HMS throws an error if it isn't
                 #print(i, outflowCurveTimeSteps, inflowRate, outflowRate, storageInCurrentTimestep)
                 #assert(storageInCurrentTimestep > 0)
-                storageInCurrentTimestep = 0.0001
+                storageInCurrentTimestep = 0.00001
 
-            cumulativeStorage.append(cumulativeStorage[i] + storageInCurrentTimestep)
+            cumulativeStorage.append(cumulativeStorage[i+1] + storageInCurrentTimestep)
 
         # convert the cumulative storage array to acre-ft by dividing by the number of
         # sq ft in an acre. We also ignore the initial cumulative storage value as this
         # value is only used to initialize the cumulative storage calculation.
-        cumulativeStorage_acreft = map(lambda x: x/43560, cumulativeStorage[1:])
+        cumulativeStorage_acreft = map(lambda x: x/43560, cumulativeStorage)#[1:])
     else:
         outflowRates = [0.0, 10000.0, 100000.0, 1000000.0]
         cumulativeStorage_acreft = [0.0, 0.01, 0.10, 0.50]

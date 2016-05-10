@@ -10,7 +10,7 @@ def setme1(self):
     self.scriptPath="C:/Users/nschiff2/IdeaProjects/AutoHEC/src"
     self.hmsDir="HEC-HMS"
     self.modelPath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/"
-    self.modelVersion = self.modelPath + "Stony_V9.0optim_test/"
+    self.modelVersion = self.modelPath + "Stony_V15.0optim/"
     self.hmsVersion = self.modelVersion + "HydrologicModels/ExistingConditions/"
     self.hmsCommand="HEC-HMS.cmd"
     self.dssDir="HEC-DSSVue"
@@ -18,7 +18,7 @@ def setme1(self):
 
     # Use these options only when you need a different model version to build the
     # storage-outflow curves
-    self.osModelVersion = self.modelPath + "Stony_V9.0optim_test/"
+    self.osModelVersion = self.modelPath + "Stony_V15.0optim24/"
     self.osHmsVersion = self.osModelVersion + "HydrologicModels/ExistingConditions/"
 
     return self
@@ -28,12 +28,12 @@ def setme2(self):
     # --hmsRunName is the name of the compute option you would choose in HEC-HMS
     # --hmsMetFile is the location of the relevant *.met file for hmsRunName
     # --hmsGageName is the name of the gage shown in the hmsMetFile
-    # self.hmsRunName = "100YR12HRHUFFARF" #"HuffQII_100yr12hrISWS" #"HuffQIII_100yr24hrISWS"
-    # self.hmsMetFile = self.hmsProjectPath + "/HuffQII_100yr12hr" #"/HuffQII_100yr12hrISWS" #"/HuffQIII_100yr24hrISWS"
-    # self.hmsGageName = "100YR12HRHUFFARF" #"HuffQII_100yr12hrISWS" #"HuffQIII_100yr24hrISWS"
-    self.hmsRunName = "HuffQIII_100yr24hrISWS"
-    self.hmsMetFile = self.hmsProjectPath + "/HuffQIII_100yr24hrISWS"
-    self.hmsGageName = "HuffQIII_100yr24hrISWS"
+    self.hmsRunName = "100YR12HRHUFFARF" #"HuffQII_100yr12hrISWS" #"HuffQIII_100yr24hrISWS"
+    self.hmsMetFile = self.hmsProjectPath + "/HuffQII_100yr12hr" #"/HuffQII_100yr12hrISWS" #"/HuffQIII_100yr24hrISWS"
+    self.hmsGageName = "100YR12HRHUFFARF" #"HuffQII_100yr12hrISWS" #"HuffQIII_100yr24hrISWS"
+    # self.hmsRunName = "HuffQIII_100yr24hrISWS"
+    # self.hmsMetFile = self.hmsProjectPath + "/HuffQIII_100yr24hrISWS"
+    # self.hmsGageName = "HuffQIII_100yr24hrISWS"
 
     # Future parameters
     # --redevelopment is the proportion of the subbasin that is routed
@@ -43,9 +43,11 @@ def setme2(self):
     #   be adjusted by subbasin if you run InitHMS.py separate from
     #   the model runs, manually edit subbasin_records.json, and then
     #   run HEC-HMS and HEC-RAS.
+    # --releaseratealt is the alternative release rate for the subbasins
+    #   listed in alt_RR_basins.txt in the version home directory
     self.redevelopment = 40
-    self.curvenumber = 88
-    self.releaserate = 0.15
+    self.curvenumber = 73
+    self.releaserate = 0.3
     self.releaseratealt = 0.3
 
     # HMS project configuration data
@@ -75,7 +77,7 @@ def setme2(self):
     # --stationFileName is the location of a text file that lists all the
     #   station names, one per line (usually the home directory of a watershed)
     self.rasProjectName = "STCR_Design"
-    self.rasPlanName = "HUFFQIII_100YR24HRISWS" #"100YR12HRHuffQII" #
+    self.rasPlanName = "100YR12HRHuffQII" #"HUFFQIII_100YR24HRISWS" #
     self.rasProjectPath = self.modelVersion + "HydraulicModels/ExistingConditions/STCR/STCR_DesignRuns"
     self.stationFileName = self.modelPath + self.rasProjectName + "_StationList.txt"
 

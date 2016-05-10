@@ -15,6 +15,8 @@ at the Illinois State Water Survey (2015-2016).
 --depends on: HEC_Inundation.py
 
 # HEC_Inundation.py [driver script] #
+**can be run independently or from Compare_Inundation.py--may comment
+or uncomment the method call**
 --description: automatically extracts data from DSS file based on
   BankStationConfig.py settings and calculates the max out-of-banks
   level and number of time periods out of banks for each event at each
@@ -96,9 +98,25 @@ at the Illinois State Water Survey (2015-2016).
 --roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
   figures; for river stations, sigfigs is seven because only eight
   characters are allowed
---writeFlowDiff(outFile, flowDiff): Writes flowDiff to outFile [not currently used]
 --getFlow(bVersions, cVersions, filePath): reads data from
   text files created using getFlowData.py, matches stations, and calls plotFlow to plot both
   hydrographs curves
 --plotFlow(soDataManual, soDataAuto, figName, bV, cV, filePath): Plots the
   hydrographs in two datasets on a single axis for comparison
+
+
+## Structure of Compare_Inundation.py ##
+--roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
+  figures; for river stations, sigfigs is seven because only eight
+  characters are allowed
+--readFromFile(filePath, fileName): reads  data from pickled file [not used]
+--readFromCSV(filePath, fileName): Reads inundation data from CSV file
+--findDiff(baseData, compareData, dataType): calculates the difference in inundation
+  depth and time between two model versions. If the base model version shows no out-
+  of-banks depth, the difference is set to -1; if the comparison model version shows
+  no out-of-banks depth, the difference is set to -2. Any depth differences >0.1 ft
+  or time differences >0.5 are printed in the output with the station ID.
+--getPeak(versions, filePath, savePath, watershed): drives the looping process through
+  each model version, calling other methods
+--plotScatter(dataX, dataY, versions, filePath): Plots the difference between two datasets
+  on a scatter plot with depth on the y-axis and time on the x-axis.

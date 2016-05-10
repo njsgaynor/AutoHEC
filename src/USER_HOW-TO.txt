@@ -44,10 +44,14 @@ How to run code that splits basins and runs models**:
 2. Create a text file that lists the prefixes for the *_hecConfig.py
    files needed for this HEC-RAS run. Use this file name as the input in
    runModel.cmd.
-3. Open Windows Command Prompt.
-4. Change to directory containing runModel.cmd (AutoHEC/src)
+3. Create a text file called alt_RR_basins.txt that lists all of the
+   subbasins that should use the alternative release rate instead of the
+   regular release rate. This file needs to exist and should be empty if
+   all the subbasins use the regular release rate.
+4. Open Windows Command Prompt.
+5. Change to directory containing runModel.cmd (AutoHEC/src)
    directory ("dir" lists directory contents and "cd" changes directory).
-5. Type "runModel.cmd" into the Windows command line and press Enter.
+6. Type "runModel.cmd" into the Windows command line and press Enter.
    Output will be saved to output.txt.
 **see README in SplitBasins directory for how to run the subbasin
 splitting code on its own
@@ -64,10 +68,12 @@ errors. Common errors may include:
    manually running HEC-HMS. The most likely problem is that a reservoir
    overflowed and the max storage in the rating curve needs to be slightly
    increased (by maybe 1%).
-3. HEC-RAS runs in less than about 224 seconds. This will show up on the
-   last line of the output file. Try running the model manually in HEC-RAS.
-   The most likely problem is that the model becames unstable. Try using a
-   different time step or locating where the model becomes unstable.
+3. HEC-RAS runs in less than 150 seconds. This will show up on the
+   last line of the output file. Try running the model manually in HEC-RAS
+   to make sure it runs to completion. The most likely problem is that the
+   model became unstable. Try using a different time step or locating where
+   the model becomes unstable. Slightly adjusting HTAB parameters at
+   unstable cross sections may also help model stability.
 
 ## Notes ##
 [none at the moment]
