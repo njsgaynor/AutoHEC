@@ -33,3 +33,4 @@ class Subwatershed(dict):
         self['curvenumber'] = float(config.curvenumber)
         self['releaserate'] = float(config.releaserate)
         self['releaseratealt'] = float(config.releaseratealt)
+        self['releaseratealt2'] = float(config.releaseratealt2)

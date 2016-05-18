@@ -71,8 +71,11 @@ def readBasinFile(ws, scriptPath, modelVersion):
     altRRfile = open(modelVersion + "alt_RR_basins.txt", 'rb')
     altRRlist = altRRfile.readlines()
     altRRfile.close()
+    altRRfile2 = open(modelVersion + "alt_RR_basins2.txt", 'rb')
+    altRRlist2 = altRRfile2.readlines()
+    altRRfile2.close()
     altRRlist[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist]
-    print altRRlist
+    altRRlist2[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist2]
     # Read elements from *.basin file and split the subbasins; write to new *.basin file
     # Also create list of table names (txt) and and subbasins/release rates (JSON) and write to files for later use
     with open(ws['basinin'], 'rb') as basinsrc, open(ws['basinout'], 'wb') as basinsink, open(ws['pdatafile'], 'ab') \
@@ -95,11 +98,16 @@ def readBasinFile(ws, scriptPath, modelVersion):
                     b = Basin.readBasin(currentLine, basinsrc, basinsink)
                 elif currentLine.startswith('Subbasin:'):
                     b, b2, soname = Subbasin.readSubbasin(currentLine, basinsrc, basinsink, ws['redevelopment'],
-                                                      ws['curvenumber'], ws['releaserate'], altRRlist, ws['releaseratealt'])
+                                                          ws['curvenumber'], ws['releaserate'], altRRlist,
+                                                          ws['releaseratealt'], altRRlist2, ws['releaseratealt2'])
                     if b.getIdentifier() in altRRlist:
                         tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaseratealt']])
                         sbAll.newItem(b.getIdentifier(), float(ws['releaseratealt']), b.area.getAsFloat(), '')
                         sbAll.newItem(b2.getIdentifier(), float(ws['releaseratealt']), b2.area.getAsFloat(), soname)
+                    elif b.getIdentifier() in altRRlist2:
+                        tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaseratealt2']])
+                        sbAll.newItem(b.getIdentifier(), float(ws['releaseratealt2']), b.area.getAsFloat(), '')
+                        sbAll.newItem(b2.getIdentifier(), float(ws['releaseratealt2']), b2.area.getAsFloat(), soname)
                     else:
                         tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaserate']])
                         sbAll.newItem(b.getIdentifier(), float(ws['releaserate']), b.area.getAsFloat(), '')

@@ -49,6 +49,7 @@ def setme2(self):
     self.curvenumber = 73
     self.releaserate = 0.3
     self.releaseratealt = 0.3
+    self.releaseratealt2 = 0.3
 
     # HMS project configuration data
     # --numHmsModels is the number of HMS model runs needed for a single RAS run

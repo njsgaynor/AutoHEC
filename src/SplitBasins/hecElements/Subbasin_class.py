@@ -21,12 +21,16 @@ class Subbasin(Element):
                                  self.canopy.getName(), self.rlsrate.getName(), self.redevel.getName()]
 
     @classmethod
-    def readSubbasin(cls, currentLine, basinsrc, basinsink, redevel, curvenum, rlsrate, altRRlist, altrlsrate):
+    def readSubbasin(cls, currentLine, basinsrc, basinsink, redevel, curvenum, rlsrate, altRRlist, altrlsrate,
+                     altRRlist2, altrlsrate2):
         s = Subbasin()
         super(Subbasin, s).deserialize(currentLine, basinsrc)
         if s.getIdentifier() in altRRlist:
             sNew, soname = s.divideSubbasin(basinsink, redevel, curvenum, altrlsrate)
             s.rlsrate.setValue(altrlsrate)
+        elif s.getIdentifier() in altRRlist2:
+            sNew, soname = s.divideSubbasin(basinsink, redevel, curvenum, altrlsrate2)
+            s.rlsrate.setValue(altrlsrate2)
         else:
             sNew, soname = s.divideSubbasin(basinsink, redevel, curvenum, rlsrate)
             s.rlsrate.setValue(rlsrate)

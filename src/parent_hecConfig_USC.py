@@ -10,7 +10,7 @@ def setme1(self):
     self.scriptPath="C:/Users/nschiff2/IdeaProjects/AutoHEC/src"
     self.hmsDir="HEC-HMS"
     self.modelPath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/"
-    self.modelVersion = self.modelPath + "USC_V15.0optim/"
+    self.modelVersion = self.modelPath + "USC_V22.0optim/"
     self.hmsVersion = self.modelVersion
     self.hmsCommand="HEC-HMS.cmd"
     self.dssDir="HEC-DSSVue"
@@ -41,10 +41,11 @@ def setme2(self):
     #   be adjusted by subbasin if you run InitHMS.py separate from
     #   the model runs, manually edit subbasin_records.json, and then
     #   run HEC-HMS and HEC-RAS.
-    self.redevelopment = 40
-    self.curvenumber = 73
+    self.redevelopment = 15
+    self.curvenumber = 88
     self.releaserate = 0.3
-    self.releaseratealt = 0.3
+    self.releaseratealt = 0.2
+    self.releaseratealt2 = 0.15
 
     # HMS project configuration data
     # --numHmsModels is the number of HMS model runs needed for a single RAS run

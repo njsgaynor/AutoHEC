@@ -22,7 +22,7 @@ class BankStation_config:
         # self.startDate = "01DEC2006"
 
         # USC options
-        self.version = "3.0optim"
+        self.version = "4.0optim"
         self.bankFileName = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_banks2.csv" #CSV file
         self.filePath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_V" + self.version + "/"
         self.dataPath = self.filePath
