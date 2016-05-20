@@ -32,7 +32,7 @@ class CompareConfig:
         #             self.dssHmsFilePath + "StonyCreek/HMS/STCR_DesignRuns/STCR_combined.dss"]
         # self.bankFileName = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/StonyCreek_banks2.csv" #CSV file
         # self.inundOutFileName = self.filePath + "OOB_StonyCreek_V"
-        # self.rasRunName = "100YR24HRISWS" #"HUFFQII_100YR12H" #
+        # self.rasRunName = "HUFFQII_100YR12H" #"100YR24HRISWS" #
         # self.startDate = "01DEC2006"
         # self.watershed = "StonyCreek"
         # self.timestep = 5.0
@@ -42,4 +42,4 @@ class CompareConfig:
         # --first item is considered the base model
         # --max of 5 for now
         # --cannot use a non-redeveloped model as the first model when plotting rating curves
-        self.versions = ["2.0", "11.0optim", "11.1optim", "12.0optim", "12.1optim", "13.0optim", "14.0optim"]
+        self.versions = ["2.0","11.0optim","11.1optim","12.0optim","12.1optim","13.0optim", "15.0optim"]

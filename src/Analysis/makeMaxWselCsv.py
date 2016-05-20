@@ -39,7 +39,7 @@ def readFromFile(filePath, fileName):
     return pickle.load(open(filePath + fileName, 'rb'))
 
 
-def reassignKeys(dataDict, runName, dataAddress):
+def reassignKeys(dataDict):
     keyList = dataDict.keys()
     # Get rid of interpolated stations
     for key in keyList:
@@ -75,13 +75,37 @@ def filterStations(filePath):
         return stationList
 
 
-def writeToCSV(writeData, filePath, versions):
+def removePeriod(versions):
+    for v in range(len(versions)):
+        versions[v] = 'v' + versions[v]
+        vList = list(versions[v])
+        if '.' in vList:
+            iDot = vList.index('.')
+            vList[iDot] = '_'
+            versions[v] = ''.join(vList)
+    return versions
+
+
+def diffFromBase(versions, elevData):
+    diffElevData = {}
+    for v in range(1,len(versions)):
+        for k in elevData.keys():
+            if not (k in diffElevData):
+                diffElevData[k] = {}
+            diffElevData[k][v] = elevData[k][versions[0]] - elevData[k][versions[v]]
+    return diffElevData
+
+
+def writeToCSV(writeData, diffData, filePath, versions):
     outFileName = filePath + "all_max_stages.csv"
     print("Writing to CSV file " + outFileName + "...")
     if os.path.isfile(outFileName):
         os.remove(outFileName)
     header = ['River', 'Reach', 'StationID']
-    header.extend(versions)
+    versionsStr = removePeriod(versions)
+    header.extend(versionsStr)
+    for v in range(1,len(versionsStr)):
+        header.append(versionsStr[0] + "-" + versionsStr[v])
     # Write to a CSV file for further analysis or viewing in Excel
     with open(outFileName, 'wb') as output:
         writer = csv.writer(output)
@@ -91,23 +115,25 @@ def writeToCSV(writeData, filePath, versions):
             if k in stationList:
                 writeMe = splitKey(k)
                 writeMe.extend(writeData[k].values())
+                writeMe.extend(diffData[k].values())
                 writer.writerow(writeMe)
             else:
                 pass
 
 
-def getPeak(versions, filePath, runName):
+def getPeak(versions, filePath):
     print("Reading peak flow data from text file...")
     elevData = {}
     for v in versions:
         dataFileElev = "peakElev_V" + v + ".txt"
         tempData = readFromFile(filePath, dataFileElev)
-        tempData = reassignKeys(tempData, runName, "/LOCATION-ELEV//MAX STAGE/")
+        tempData = reassignKeys(tempData)
         for k in tempData.keys():
             if not (k in elevData):
                 elevData[k] = {}
             elevData[k][v] = tempData[k]
-    writeToCSV(elevData, filePath, versions)
+    diffElevData = diffFromBase(versions, elevData)
+    writeToCSV(elevData, diffElevData, filePath, versions)
 
 # Used to look at state of variables for debugging
 print('makeMaxWselCsv.py is done running.')
@@ -115,7 +141,7 @@ print('makeMaxWselCsv.py is done running.')
 def main():
     getData()
     config = CompareConfig()
-    getPeak(config.versions, config.filePath, config.rasRunName)
+    getPeak(config.versions, config.filePath)
 
 if __name__ == '__main__':
     main()

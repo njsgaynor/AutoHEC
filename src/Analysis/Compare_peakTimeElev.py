@@ -53,7 +53,7 @@ def findDiff(baseData, compareData, dataType):
     return diffData
 
 
-def reassignKeys(dataDict, runName, dataAddress):
+def reassignKeys(dataDict):
     keyList = dataDict.keys()
     # Get rid of interpolated stations
     for key in keyList:
@@ -74,7 +74,7 @@ def reassignKeys(dataDict, runName, dataAddress):
     return dataDict
 
 
-def getPeak(versions, filePath, runName):
+def getPeak(versions, filePath):
     print("Reading peak flow data from text file...")
     elevDiff = {}
     timeDiff = {}
@@ -85,8 +85,8 @@ def getPeak(versions, filePath, runName):
         dataFileTime = "peakTime_V" + v + ".txt"
         elevData[v] = readFromFile(filePath, dataFileElev)
         timeData[v] = readFromFile(filePath, dataFileTime)
-        elevData[v] = reassignKeys(elevData[v], runName, "/LOCATION-ELEV//MAX STAGE/")
-        timeData[v] = reassignKeys(timeData[v], runName, "/LOCATION-TIME//MAX STAGE/")
+        elevData[v] = reassignKeys(elevData[v])
+        timeData[v] = reassignKeys(timeData[v])
     for v in versions[1:]:
         elevDiff[v] = findDiff(elevData[versions[0]], elevData[v], "Elev")
         timeDiff[v] = findDiff(timeData[versions[0]], timeData[v], "Time")

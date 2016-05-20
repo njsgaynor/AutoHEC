@@ -66,16 +66,18 @@ or uncomment the method call**
 --roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
   figures; for river stations, sigfigs is seven because only eight
   characters are allowed
---writePeakDiff(outFile, flowDiff): Writes flowDiff to outFile [not currently used]
---getPeak(bVersions, cVersions, filePath, runName): reads data from
-  text files created using getPeakData.py, matches stations, and finds the difference
-  in the max stage time and elevation between the model versions in the config file;
-  also lists any elevation differences greater than 0.1 ft and time differences greater
-  than 0.5 hours. Calls plotScatter, which creates a scatter plot of the differences
-  in time and elevation between the model versions.
---plotScatter(dataManualX, dataManualY, dataAutoX, dataAutoY,
-  dataDiffX, dataDiffY, bV, cV, filePath): Plots the difference between two datasets on a
-  scatter plot with max stage elevation on the y-axis and max stage time on the x-axis.
+--readFromFile(filePath, fileName): reads data from pickled file created using
+  getPeakData.py
+--findDiff(baseData, compareData, dataType): calculates the difference in max stage
+  depth and time between two model versions. The color of the plotted point . Any depth
+  differences >0.1 ft can be printed in the output with the station ID.
+--reassignKeys(dataDict): the original keys are the complete data address in the
+  DSS file. This changes it to only include the river, reach, and station ID
+  separated by spaces (no forward slash).
+--getPeak(versions, filePath): drives the looping process through
+  each model version, calling other methods
+--plotScatter(dataX, dataY, versions, filePath): Plots the difference between two datasets
+  on a scatter plot with depth on the y-axis and time on the x-axis.
 
 
 ## Structure of Compare_StorageOutflow.py ##
@@ -84,12 +86,16 @@ or uncomment the method call**
 --roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
   figures; for river stations, sigfigs is seven because only eight
   characters are allowed
---writePeakDiff(outFile, flowDiff): Writes flowDiff to outFile [not currently used]
---getSO(bVersions, cVersions, filePath): reads data from
-  text files created using getSOData.py, matches subbasins, and calls plotSO to plot both
-  storage-outflow curves
---plotSO(soDataManual, soDataAuto, tableName, filePath, bV, cV): Plots the
-  storage-outflow curves in two datasets on a single axis for comparison
+--readFromFile(filePath, fileName): reads data from a pickled file created using
+  getSOData.py
+--reassignKeys(dataDict): the original keys are the complete data address in the
+  DSS file. This changes it to only include the river, reach, and station ID
+  separated by spaces (no forward slash).
+--plotLines(filePath, plotData, figName, versions): Plots the storage-outflow
+  curves in multiple datasets on a single axis for comparison
+--getSO(versions, filePath): driver method that reads data from text files
+  created using getSOData.py, matches subbasins, and calls plotSO to plot
+  specified storage-outflow curves
 
 
 ## Structure of Compare_hydrographs.py ##
@@ -98,11 +104,15 @@ or uncomment the method call**
 --roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
   figures; for river stations, sigfigs is seven because only eight
   characters are allowed
---getFlow(bVersions, cVersions, filePath): reads data from
-  text files created using getFlowData.py, matches stations, and calls plotFlow to plot both
-  hydrographs curves
---plotFlow(soDataManual, soDataAuto, figName, bV, cV, filePath): Plots the
-  hydrographs in two datasets on a single axis for comparison
+--readFromFile(filePath, fileName): reads data from a pickled file created using
+  getPeakData.py
+--reassignKeys(dataDict): the original keys are the complete data address in the
+  DSS file. This changes it to only include the river, reach, and station ID
+  separated by spaces (no forward slash).
+--plotLines(filePath, plotData, figName, versions): Plots the hydrographs in multiple
+  datasets on a single axis for comparison
+--getFlow(versions, filePath): reads data from text files created using getFlowData.py,
+  matches stations, and calls plotLines to plot both hydrographs curves
 
 
 ## Structure of Compare_Inundation.py ##
@@ -111,12 +121,35 @@ or uncomment the method call**
   characters are allowed
 --readFromFile(filePath, fileName): reads  data from pickled file [not used]
 --readFromCSV(filePath, fileName): Reads inundation data from CSV file
---findDiff(baseData, compareData, dataType): calculates the difference in inundation
+--findDiff(baseData, compareData): calculates the difference in inundation
   depth and time between two model versions. If the base model version shows no out-
   of-banks depth, the difference is set to -1; if the comparison model version shows
   no out-of-banks depth, the difference is set to -2. Any depth differences >0.1 ft
   or time differences >0.5 are printed in the output with the station ID.
---getPeak(versions, filePath, savePath, watershed): drives the looping process through
+--getPeak(versions, filePath, savePath, watershed, timestep): drives the looping process through
   each model version, calling other methods
---plotScatter(dataX, dataY, versions, filePath): Plots the difference between two datasets
+--plotScatter(dataX, dataY, versions, filePath, timestep): Plots the difference between two datasets
   on a scatter plot with depth on the y-axis and time on the x-axis.
+
+
+## Structure of makeMaxWselCsv.py ##
+--getData(): calls getPeakData.py, which extracts the max stage
+  and the time of the max stage for each station
+--roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
+  figures; for river stations, sigfigs is seven because only eight
+  characters are allowed
+--readFromFile(filePath, fileName): reads data from a pickled file created using
+  getPeakData.py
+--reassignKeys(dataDict): the original keys are the
+  complete data address in the DSS file. This changes it to only include the river, reach,
+  and station ID separated by spaces (no forward slash).
+--splitKey(k): splits a key into river, reach, and station ID as three separate items
+--filterStations(filePath): filters the stations that are stored for output using the
+  provided CSV file (currently "USC_MEEKMA_CSV.csv")
+--removePeriod(versions): replaces the decimal in a version number with an underscore,
+  hopefully allowing direct import into GIS software
+--writeToCSV(writeData, filePath, versions): writes max stage from all versions listed
+  in Compare_Config.py to a CSV file, along with the river, reach, and station IDs as
+  filtered using filterStations. CSV file includes a header row.
+--getPeak(versions, filePath, runName): driver method that reads in, processes, and
+  writes max stage data to a CSV file.

@@ -8,30 +8,81 @@ at the Illinois State Water Survey (2015-2016).
 
 
 ## Purpose ##
-The Compare_*.py scripts were developed to compare two model versions of HEC-HMS
-and HEC-RAS. It is used both to test the automation code in AutoHEC against
-a manual version of the same model run and to compare multiple automated
-versions of the model (with different release rates, redevelopment rates,
-etc.) to assess the effect of each of these factors.
+The Compare_*.py scripts were developed to compare two or more model versions
+of HEC-HMS and HEC-RAS.
 
 HEC_Inundation.py is somewhat different in that it uses a single model
 run and calculates the duration and max depth of water over the lower bank
-station at each river station. It is currently not set up to compare model
-automatically. Data is output into a CSV file for easy processing elsewhere
-or viewing in Excel.
+station at each river station. Data is output into a CSV file for easy
+processing elsewhere or viewing in Excel. Its partner script,
+Compare_Inundation.py, compares the out-of-banks data in the CSV
+files using a graphical format.
 
 
 ## How to run code that calculates time and depth of inundation ##
-1. Modify HEC_Inundation_Config.py to find the files and data addresses
-   for the stage time series, max stage elevation, and max stage time.
+1. Modify Compare_Config.py.
    **When preparing the bank station elevations file, do not include
    Node Names in the table (under Options menu in the Profile Output
    Table of HEC-RAS).**
 2. Open Windows Command Prompt.
-3. Change to directory containing runInitHMS.cmd (AutoHEC/src/Analysis)
-   directory ("dir" lists directory contents and "cd" changes directory).
+3. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
+   and "cd" changes directory).
 4. Type "runHEC_Inundation.cmd" into the Windows command line and press Enter.
    Output will be saved to HEC_Inundation_output.txt.
+
+
+## How to run code that plots time and depth of inundation as a
+      difference between two model verisons##
+1. Modify Compare_Config.py.
+   **When preparing the bank station elevations file, do not include
+   Node Names in the table (under Options menu in the Profile Output
+   Table of HEC-RAS).**
+2. If the out-of-banks numbers have already been calculated using
+   HEC_Inundation.py, the sixth line of getPeak can be commented out (add a #
+   at the beginning of the line). If these number have not been calculated
+   (i.e. no OOB_USC_V#.csv or OOB_StonyCreek_V#.csv files for the relevant
+   versions), then this line should not be commented out.
+3. Open Windows Command Prompt.
+4. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
+   and "cd" changes directory).
+5. Type "Compare_Inundation.py > Compare_Inundation_output.txt" into the Windows
+   command line and press Enter. Output will be saved to
+   Compare_Inundation_output.txt.
+
+
+## How to run code that plots hydrographs ##
+1. Modify Compare_Config.py.
+2. Open Windows Command Prompt.
+3. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
+   and "cd" changes directory).
+4. Type "Compare_hydrographs.py > Compare_hydrographs_output.txt" into the Windows
+   command line and press Enter. Output will be saved to
+   Compare_hydrographs_output.txt.
+
+
+## How to run code that plots storage-outflow curves ##
+1. Modify Compare_Config.py.
+2. Open Windows Command Prompt.
+3. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
+   and "cd" changes directory).
+4. Type "Compare_StorageOutflow.py > Compare_StorageOutflow_output.txt" into
+   the Windows command line and press Enter. Output will be saved to
+   Compare_StorageOutflow_output.txt.
+
+
+## How to run code that plots time and depth of max stage as a
+      difference between two model versions ##
+1. Modify Compare_Config.py.
+   **When preparing the bank station elevations file, do not include
+   Node Names in the table (under Options menu in the Profile Output
+   Table of HEC-RAS).**
+3. Open Windows Command Prompt.
+4. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
+   and "cd" changes directory).
+5. Type "Compare_peakTimeElev.py > Compare_peakTimeElev_output.txt" into the Windows
+   command line and press Enter. Output will be saved to
+   Compare_peakTimeElev_output.txt.
+
 
 ## Notes ##
 [none at the moment]

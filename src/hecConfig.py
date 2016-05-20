@@ -4,22 +4,18 @@
 class HecConfig:
     """Simple class maintaining configuration for HEC applications"""
     def __init__(self):
-        import parent_hecConfig
-        self = parent_hecConfig.setme1(self)
+        import parent_hecConfig_USC
+        # Sets initial batch of config options from parent_hecConfig_USC.py
+        self = parent_hecConfig_USC.setme1(self)
 
         # HEC-HMS project configuration data
-        self.hmsProjectPath = self.hmsVersion + "StonyCreek/HMS/STCR_DesignRuns"
-        self.osHmsProjectPath = self.osHmsVersion + "StonyCreek/HMS/STCR_DesignRuns"
-        # ["LucasDitch/LUDT_DesignRuns", "LucasDiversionDitch/LDDT_DesignRuns",
-        #        "MelvinaDitch/MEDT_DesignRuns", "MPDT/MPDT_DesignRuns",
-        #        "OakLawn/OLCR_DesignRuns", "StonyCreek/HMS/STCR_DesignRuns"]
-        self.hmsProjectName = "STCR_combined"
-        # ["LUDT_Design", "LDDT_HMS", "MEDT_HMS", "MPDT_revised", "OLCRHMS", "STCR_combined"]
+        self.hmsProjectPath = self.hmsVersion
+        self.osHmsProjectPath = self.osHmsVersion
+        # Name of directory that contains the model versions
+        self.hmsProjectName = "USC"
 
-        self = parent_hecConfig.setme2(self)
-        self.hmsMetFile = self.hmsProjectPath + "/100yr12hrHuffARF"
-        self.basinin = self.hmsProjectPath + "/STCR_comb_Huff - Copy.basin"
-        self.basinout = self.hmsProjectPath + "/STCR_comb_Huff.basin"
+        # Sets second batch of config options from parent_hecConfig_USC.py
+        self = parent_hecConfig_USC.setme2(self)
 
     def getDataTransferFilePath(self):
         return self.scriptPath + "/jythonDtf.txt"
