@@ -13,7 +13,7 @@ class CompareConfig:
         self.bankFileName = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/USC/USC_banks2.csv" #CSV file
         self.inundOutFileName = self.filePath + "OOB_USC_V"
         self.rasRunName = "ILREVEXIMP040512"
-        #self.hmsRunName = "100-24"
+        self.hmsRunName = "100-24"
         self.startDate = "01DEC2007"
         self.watershed = "USC"
         self.timestep = 6.0
@@ -42,4 +42,14 @@ class CompareConfig:
         # --first item is considered the base model
         # --max of 5 for now
         # --cannot use a non-redeveloped model as the first model when plotting rating curves
-        self.versions = ["2.0","11.0optim","11.1optim","12.0optim","12.1optim","13.0optim", "15.0optim"]
+        self.versions = ["15.0optim"]#["2.0", "17.0optim", "23.0optim"] #,"16.0optim", "22.0optim"
+                        #["2.0","3.0optim","4.0optim","5.0optim","6.0optim","7.0","8.0","9.0optim",
+                        # "10.0optim","11.0optim","11.1optim","12.0optim","12.1optim","13.0optim",
+                        # "14.0optim","15.0optim","16.0optim","17.0optim","19.0optim","21.0optim",
+                        # "22.0optim","23.0optim","24.0optim"]
+        # Description of each plotted/analyzed model version, used for figure legends
+        self.vDescription = ["40% Development; 0.3 cfs/acre, CN 73 (v15)"] #["DWP Base Model (v2)",
+                             # "40% Development; WB/MS34-MS40/MS42 0.25, AH01-AH12 0.2, rest 0.3 cfs/acre (v17)",
+                             # "40% Development; WB/MS34-MS40/MS42 0.2, AH01-AH12 0.15, rest 0.3 cfs/acre (v23)"]
+                             # "15% Development; WB/MS34-MS40/MS42 0.25, AH01-AH12 0.2, rest 0.3 cfs/acre (v16)",
+                             # "15% Development; WB/MS34-MS40/MS42 0.2, AH01-AH12 0.15, rest 0.3 cfs/acre (v22)"]

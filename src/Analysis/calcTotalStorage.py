@@ -3,15 +3,14 @@
 # Created for: Illinois State Water Survey
 # Date last updated: May 2016
 
-# This program takes STORAGE-OUTFLOW data from the HEC-RAS model and plots the
-# curves from different versions on a single graph for each subbasin.
+# This program takes STORAGE data from the HEC-HMS model and finds the
+# maximum at each subbasin from multiple model versions.
 
 import math
 from Compare_Config import CompareConfig
 from subprocess import call
 import pickle
 import os
-import matplotlib.pyplot as pyplot
 import csv
 
 def getData():
@@ -22,7 +21,7 @@ def getData():
     # Path to scritp that extracts data from DSS file
     scriptPath = "C:/Users/nschiff2/IdeaProjects/AutoHEC/src/Analysis/"
     # Use HEC-DSSVue to run script (only way to use hec package that accesses DSS files)
-    call(["HEC-DSSVue.cmd", "-s", scriptPath + "getSOData.py"], shell=True)
+    call(["HEC-DSSVue.cmd", "-s", scriptPath + "getStorageData.py"], shell=True)
     os.chdir(popd)
 
 def roundSigfigs(num, sigfigs):
@@ -64,35 +63,10 @@ def reassignKeys(dataDict):
     return dataDict
 
 
-def plotLines(filePath, plotData, figName, versions):
-    pyplot.ioff()
-    pyplot.figure(1)
-    lineColors = ['b-.', 'r--', 'k:', 'c-', 'm-', 'b:', 'r:', 'c:', 'm:']
-    lineWidths = [2, 1, 2, 1, 1, 2, 2, 2, 2]
-    plotLine = versions[:]
-    for v in range(1,len(versions)):
-        try:
-            plotLine[v], = pyplot.plot(plotData[versions[v]][figName][0],
-                                       plotData[versions[v]][figName][1], lineColors[v],
-                                       lw=lineWidths[v], Label=versions[v])
-        except KeyError:
-            print("Key not found in V" + versions[v] + ": " + figName)
-    pyplot.legend(plotLine, versions)
-    #pyplot.legend(handles=[manualLine, autoLine])
-    pyplot.ylabel('Discharge (cfs)')
-    pyplot.xlabel('Storage (ac-ft)')
-    pyplot.title(figName + " V" + versions[0])
-    try:
-        pyplot.savefig(filePath + figName + "_V" + versions[0] + "_SO.png")
-    except Exception, e:
-        print(str(e))
-    pyplot.close("all")
-
-
 def recordTotalStorage(storage, subbasin, totStorage):
     for v in storage.keys():
         try:
-            totStorage[subbasin][v] = storage[v][subbasin][1][-1]
+            totStorage[subbasin][v] = max(storage[v][subbasin])
         except KeyError:
             totStorage[subbasin][v] = -1
         if totStorage[subbasin][v] > 10000.0:
@@ -129,21 +103,19 @@ def writeTotalStorage(totStorage, fileName, filePath, versions):
         csvwriter.writerow(toWrite)
 
 
-def getSO(versions, fileName, filePath):
-    print("Reading storage-outflow data from text files...")
-    soData = {}
+def getStorage(versions, fileName, filePath):
+    print("Reading storage data from text files...")
+    sData = {}
     totStorage = {}
     for v in versions:
-        dataFile = "storageoutflow_V" + v + ".txt"
-        soData[v] = readFromFile(filePath, dataFile)
-        soData[v] = reassignKeys(soData[v])
-    keylist = soData[versions[1]].keys()
-    print("Plotting storage-outflow data...")
+        dataFile = "storage_V" + v + ".txt"
+        sData[v] = readFromFile(filePath, dataFile)
+        sData[v] = reassignKeys(sData[v])
+    keylist = sData[versions[1]].keys()
     for k in keylist:
-        plotLines(filePath, soData, k, versions)
-    #     totStorage[k] = {}
-    #     totStorage = recordTotalStorage(soData, k, totStorage)
-    # writeTotalStorage(totStorage, fileName, filePath, versions)
+        totStorage[k] = {}
+        totStorage = recordTotalStorage(sData, k, totStorage)
+    writeTotalStorage(totStorage, fileName, filePath, versions)
 
 # Used to look at state of variables for debugging
 print('done')
@@ -151,7 +123,7 @@ print('done')
 def main():
     getData()
     config = CompareConfig()
-    getSO(config.versions, config.watershed, config.filePath)
+    getStorage(config.versions, config.watershed, config.filePath)
 
 if __name__ == '__main__':
     main()

@@ -67,26 +67,32 @@ def reassignKeys(dataDict):
     return dataDict
 
 
-def plotLines(filePath, plotData, figName, versions):
+def plotLines(filePath, plotData, figName, versions, timestep, vDesc):
     pyplot.ioff()
-    pyplot.figure(1)
-    lineColors = ['b-.', 'r--', 'k:', 'c-', 'm-']
-    lineWidths = [2, 1, 2, 1, 1]
+    fig = pyplot.figure(1)
+    lineColors = ['Black', 'DodgerBlue', 'Coral', 'SeaGreen', 'SaddleBrown']
+    lineStyles = ['-', '--', ':', '-.', ':']
+    lineWidths = [1, 2, 2, 2, 2]
     plotLine = versions[:]
+    ax = fig.add_subplot(111)
     for v in range(len(versions)):
-        plotLine[v], = pyplot.plot(range(len(plotData[versions[v]][figName])),
-                                   plotData[versions[v]][figName], lineColors[v],
-                                   lw=lineWidths[v], Label=versions[v])
-    pyplot.legend(plotLine, versions)
-    #pyplot.legend(handles=[manualLine, autoLine])
-    pyplot.ylabel('Flow (cfs)')
-    pyplot.xlabel('Time Step')
-    pyplot.title(figName + " V" + versions[0])
+        timeToPlot = [x * (timestep/60) / 24 for x in range(len(plotData[versions[v]][figName]))]
+        print(timeToPlot)
+        plotLine[v], = pyplot.plot(timeToPlot, plotData[versions[v]][figName], c=lineColors[v], ls=lineStyles[v],
+                                         lw=lineWidths[v], Label=vDesc[v])
+    #pyplot.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, borderaxespad=0., fancybox=True, framealpha=0.5, frameon=False, mode="expand", fontsize="10") #ncol=len(versions),
+    pyplot.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, borderaxespad=0., fancybox=True, framealpha=0.5, frameon=False, mode="expand", fontsize=8) #ncol=len(versions),
+    pyplot.subplots_adjust(top=0.8)
+    pyplot.ylabel('Discharge (cfs)', fontsize='8')
+    pyplot.xlabel('Day after model start', fontsize='8')
+    ax.grid(True, color='LightGrey', linestyle=':', linewidth=0.5)
+    pyplot.tick_params(axis='both', which='both', width=0, labelsize=8)
+    pyplot.title(figName, y=1.18) # + " V" + versions[0], y=1.12)
     pyplot.savefig(filePath + figName + "_V" + versions[0] + "_hydro.png")
     pyplot.close("all")
 
 
-def getFlow(versions, filePath):
+def getFlow(versions, filePath, timestep, vDesc):
     print("getFlow")
     flowData = {}
     for v in versions:
@@ -95,7 +101,7 @@ def getFlow(versions, filePath):
         flowData[v] = reassignKeys(flowData[v])
     keylist = flowData[versions[0]].keys()
     for k in keylist:
-        plotLines(filePath, flowData, k, versions)
+        plotLines(filePath, flowData, k, versions, timestep, vDesc)
 
 # Used to look at state of variables for debugging
 print('done')
@@ -103,7 +109,7 @@ print('done')
 def main():
     getData()
     config = CompareConfig()
-    getFlow(config.versions, config.filePath)
+    getFlow(config.versions, config.filePath, config.timestep, config.vDescription)
 
 if __name__ == '__main__':
     main()
