@@ -77,7 +77,7 @@ def getPeak(versions, filePath, savePath, watershed, timestep):
     depthDiff = {}
     inundData = {}
     for v in versions:
-        #HEC_Inundation.main(v)
+        HEC_Inundation.main(v)
         dataFileName = "OOB_" + watershed + "_V" + v + ".csv"
         inundData[v] = readFromCSV(filePath, dataFileName)
     for v in versions[1:]:
@@ -108,7 +108,7 @@ def plotScatter(dataX, dataY, versions, filePath, timestep):
         for i in range(len(dataX2plot)):
             #dottyPlots[v-1],  = \
             pyplot.scatter(dataX2plot[i], dataY2plot[i], c=dataColor[i], linewidth=0, alpha=0.3) #marker=dataMarkers,
-        #pyplot.legend(dottyPlots, diffTypes, scatterpoints=1, loc='upper right')
+        #pyplot.legend(dottyPlots, diffTypes, scatterpoints=1, loc='lower right')
 
         #pyplot.axis([-3, 3, -1.5, 1.5])
         pyplot.grid(True)

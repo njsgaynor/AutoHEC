@@ -42,13 +42,20 @@ class CompareConfig:
         # --first item is considered the base model
         # --max of 5 for now
         # --cannot use a non-redeveloped model as the first model when plotting rating curves
-        self.versions = ["15.0optim"]#["2.0", "17.0optim", "23.0optim"] #,"16.0optim", "22.0optim"
+        self.versions = ["26.40","26.40_LowDis"]
+                        # ["26.15","26.15_LowDis","26.40","26.40_LowDis","27.15","27.40"]
+                        #["1.0","6.1optim_retry2","13.0optim"]
+                        # ["2.0","3.0optim","5.0optim","9.0optim","19.0optim","10.0optim","21.0optim","4.0optim","6.0optim"]
+                        # ["4.0optim","6.0","7.0optim","13.0optim"]
+                        #["2.0", "17.0optim", "23.0optim"] #,"16.0optim", "22.0optim"
                         #["2.0","3.0optim","4.0optim","5.0optim","6.0optim","7.0","8.0","9.0optim",
                         # "10.0optim","11.0optim","11.1optim","12.0optim","12.1optim","13.0optim",
                         # "14.0optim","15.0optim","16.0optim","17.0optim","19.0optim","21.0optim",
                         # "22.0optim","23.0optim","24.0optim"]
         # Description of each plotted/analyzed model version, used for figure legends
-        self.vDescription = ["40% Development; 0.3 cfs/acre, CN 73 (v15)"] #["DWP Base Model (v2)",
+        self.vDescription = []
+                             # ["Base model", "0.3 cfs/acre", "0.3 cfs/acre"]
+                             #["DWP Base Model (v2)",
                              # "40% Development; WB/MS34-MS40/MS42 0.25, AH01-AH12 0.2, rest 0.3 cfs/acre (v17)",
                              # "40% Development; WB/MS34-MS40/MS42 0.2, AH01-AH12 0.15, rest 0.3 cfs/acre (v23)"]
                              # "15% Development; WB/MS34-MS40/MS42 0.25, AH01-AH12 0.2, rest 0.3 cfs/acre (v16)",

@@ -30,6 +30,8 @@ class Subwatershed(dict):
     def setParams(self, config):
         # Save the future conditions parameters to the current instance of Subwatershed
         self['redevelopment'] = float(config.redevelopment)
+        self['redevelopmentalt'] = float(config.redevelopmentalt)
+        self['redevelopmentalt2'] = float(config.redevelopmentalt2)
         self['curvenumber'] = float(config.curvenumber)
         self['releaserate'] = float(config.releaserate)
         self['releaseratealt'] = float(config.releaseratealt)

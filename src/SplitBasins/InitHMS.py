@@ -48,6 +48,36 @@ def copyFiles(ws, metFile):
         shutil.copyfile(metFile, metFile + ".backup")
 
 
+def readSubbasinOptionsFiles(modelVersion, altRD, altRD2, altRR, altRR2):
+    altRRfile = open(modelVersion + "alt_RR_basins.txt", 'rb')
+    altRRlist = altRRfile.readlines()
+    altRRfile.close()
+    altRRfile2 = open(modelVersion + "alt_RR_basins2.txt", 'rb')
+    altRRlist2 = altRRfile2.readlines()
+    altRRfile2.close()
+    altRDfile = open(modelVersion + "alt_RD_basins.txt", 'rb')
+    altRDlist = altRDfile.readlines()
+    altRDfile.close()
+    altRDfile2 = open(modelVersion + "alt_RD_basins2.txt", 'rb')
+    altRDlist2 = altRDfile2.readlines()
+    altRDfile2.close()
+    altRRlist[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist]
+    altRRlist2[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist2]
+    altRDlist[:] = [r.strip('\n').strip('\r').upper() for r in altRDlist]
+    altRDlist2[:] = [r.strip('\n').strip('\r').upper() for r in altRDlist2]
+    altRRdict = {}
+    altRDdict = {}
+    for i in altRRlist:
+        altRRdict[i] = altRR
+    for i in altRRlist2:
+        altRRdict[i] = altRR2
+    for i in altRDlist:
+        altRDdict[i] = altRD
+    for i in altRDlist2:
+        altRDdict[i] = altRD2
+    return altRRdict, altRDdict
+
+
 def readBasinFile(ws, scriptPath, modelVersion):
     from hecElements.Basin_class import Basin
     from hecElements.Subbasin_class import Subbasin
@@ -68,14 +98,8 @@ def readBasinFile(ws, scriptPath, modelVersion):
     print(subbasinFile)
     # Make backup of *.pdata file
     shutil.copyfile(ws['pdatafile'], pdatabackup)
-    altRRfile = open(modelVersion + "alt_RR_basins.txt", 'rb')
-    altRRlist = altRRfile.readlines()
-    altRRfile.close()
-    altRRfile2 = open(modelVersion + "alt_RR_basins2.txt", 'rb')
-    altRRlist2 = altRRfile2.readlines()
-    altRRfile2.close()
-    altRRlist[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist]
-    altRRlist2[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist2]
+    altRRdict, altRDdict = readSubbasinOptionsFiles(modelVersion, ws['redevelopmentalt'], ws['redevelopmentalt2'],
+                                                    ws['releaseratealt'], ws['releaseratealt2'])
     # Read elements from *.basin file and split the subbasins; write to new *.basin file
     # Also create list of table names (txt) and and subbasins/release rates (JSON) and write to files for later use
     with open(ws['basinin'], 'rb') as basinsrc, open(ws['basinout'], 'wb') as basinsink, open(ws['pdatafile'], 'ab') \
@@ -98,20 +122,17 @@ def readBasinFile(ws, scriptPath, modelVersion):
                     b = Basin.readBasin(currentLine, basinsrc, basinsink)
                 elif currentLine.startswith('Subbasin:'):
                     b, b2, soname = Subbasin.readSubbasin(currentLine, basinsrc, basinsink, ws['redevelopment'],
-                                                          ws['curvenumber'], ws['releaserate'], altRRlist,
-                                                          ws['releaseratealt'], altRRlist2, ws['releaseratealt2'])
-                    if b.getIdentifier() in altRRlist:
-                        tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaseratealt']])
-                        sbAll.newItem(b.getIdentifier(), float(ws['releaseratealt']), b.area.getAsFloat(), '')
-                        sbAll.newItem(b2.getIdentifier(), float(ws['releaseratealt']), b2.area.getAsFloat(), soname)
-                    elif b.getIdentifier() in altRRlist2:
-                        tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaseratealt2']])
-                        sbAll.newItem(b.getIdentifier(), float(ws['releaseratealt2']), b.area.getAsFloat(), '')
-                        sbAll.newItem(b2.getIdentifier(), float(ws['releaseratealt2']), b2.area.getAsFloat(), soname)
+                                                          altRDdict, ws['curvenumber'], ws['releaserate'], altRRdict)
+                    ID = b.getIdentifier()
+                    ID2 = b2.getIdentifier()
+                    if ID in altRRdict:
+                        tableList.append([ID2, soname, b2.area.getAsFloat(), altRRdict[ID]])
+                        sbAll.newItem(ID, float(altRRdict[ID]), b.area.getAsFloat(), '')
+                        sbAll.newItem(ID2, float(altRRdict[ID]), b2.area.getAsFloat(), soname)
                     else:
-                        tableList.append([b2.getIdentifier(), soname, b2.area.getAsFloat(), ws['releaserate']])
-                        sbAll.newItem(b.getIdentifier(), float(ws['releaserate']), b.area.getAsFloat(), '')
-                        sbAll.newItem(b2.getIdentifier(), float(ws['releaserate']), b2.area.getAsFloat(), soname)
+                        tableList.append([ID2, soname, b2.area.getAsFloat(), ws['releaserate']])
+                        sbAll.newItem(ID, float(ws['releaserate']), b.area.getAsFloat(), '')
+                        sbAll.newItem(ID2, float(ws['releaserate']), b2.area.getAsFloat(), soname)
                     Pdata.newPdata(soname, pdatasink, ws['dssfile'])
                 elif currentLine.startswith('Junction:'):
                     b = Junction.readJunction(currentLine, basinsrc, basinsink)

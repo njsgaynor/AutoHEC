@@ -10,7 +10,7 @@ def setme1(self):
     self.scriptPath="C:/Users/nschiff2/IdeaProjects/AutoHEC/src"
     self.hmsDir="HEC-HMS"
     self.modelPath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/"
-    self.modelVersion = self.modelPath + "Stony_V16.0optim/"
+    self.modelVersion = self.modelPath + "Stony_V6.1optim_retry2/"
     self.hmsVersion = self.modelVersion + "HydrologicModels/ExistingConditions/"
     self.hmsCommand="HEC-HMS.cmd"
     self.dssDir="HEC-DSSVue"
@@ -18,7 +18,7 @@ def setme1(self):
 
     # Use these options only when you need a different model version to build the
     # storage-outflow curves
-    self.osModelVersion = self.modelPath + "Stony_V16.0optim24/"
+    self.osModelVersion = self.modelPath + "Stony_V8.0optim/"
     self.osHmsVersion = self.osModelVersion + "HydrologicModels/ExistingConditions/"
 
     return self
@@ -45,11 +45,11 @@ def setme2(self):
     #   run HEC-HMS and HEC-RAS.
     # --releaseratealt is the alternative release rate for the subbasins
     #   listed in alt_RR_basins.txt in the version home directory
-    self.redevelopment = 40
-    self.curvenumber = 73
-    self.releaserate = 0.15
-    self.releaseratealt = 0.15
-    self.releaseratealt2 = 0.15
+    self.redevelopment = 15
+    self.curvenumber = 88
+    self.releaserate = 0.3
+    self.releaseratealt = 0.3
+    self.releaseratealt2 = 0.3
 
     # HMS project configuration data
     # --numHmsModels is the number of HMS model runs needed for a single RAS run

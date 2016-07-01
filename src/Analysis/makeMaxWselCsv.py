@@ -41,6 +41,7 @@ def readFromFile(filePath, fileName):
 
 def reassignKeys(dataDict):
     keyList = dataDict.keys()
+    newDataDict = {}
     # Get rid of interpolated stations
     for key in keyList:
         # Extract station ID from data address in DSS file
@@ -51,39 +52,50 @@ def reassignKeys(dataDict):
             if(float(u[2]))>0:
                 u[2] = roundSigfigs(float(u[2]), 7)  # eight characters/seven sig figs allowed
                 newKey = " ".join(u[1:3])  # river/reach
-                dataDict[newKey] = dataDict.pop(key)# + dataAddress + runName + "/")
+                newDataDict[newKey] = dataDict.pop(key)# + dataAddress + runName + "/")
             else:
                 print("Popping " + key)
                 dataDict.pop(key)# + dataAddress + runName + "/")
         except ValueError:  # if station ID includes anything but numbers (* is interpolated; letters may be a structure)
             print("ValueError:", key)
-    return dataDict
-
-
-def splitKey(k):
-    sKey = k.split(' ')
-    print(' '.join(sKey[0:-2]), sKey[-2], sKey[-1])
-    return [' '.join(sKey[0:-2]), sKey[-2], sKey[-1]]
+    return newDataDict
 
 
 def filterStations(filePath):
     with open(filePath + "USC_MEEKMA_XS.csv", 'rb') as inputFile:
         stationList = []
+        stationAddress = {}
         reader = csv.reader(inputFile)
         for row in reader:
-            stationList.append(' '.join(row).upper())
-        return stationList
+            r = row
+            if 'STONY' in r[0].upper():
+                rdiv = [r[0],r[1],str(float(r[2])/5280.0)]
+            else:
+                rdiv = r
+            try:
+                rdiv[2] = roundSigfigs(float(rdiv[2]), 8)
+            except Exception, e:
+                print(e)
+            stationList.append(' '.join(rdiv).upper())
+            stationAddress[' '.join(rdiv).upper()] = '/'.join(r).upper()
+    return stationList, stationAddress
+
+
+def splitKey(k):
+    sKey = k.split('/')
+    return [sKey[0], sKey[1], sKey[2]]
 
 
 def removePeriod(versions):
+    versions2 = versions[:]
     for v in range(len(versions)):
-        versions[v] = 'v' + versions[v]
-        vList = list(versions[v])
+        versions2[v] = 'v' + versions[v]
+        vList = list(versions2[v])
         if '.' in vList:
             iDot = vList.index('.')
             vList[iDot] = '_'
-            versions[v] = ''.join(vList)
-    return versions
+            versions2[v] = ''.join(vList)
+    return versions2
 
 
 def diffFromBase(versions, elevData):
@@ -92,7 +104,7 @@ def diffFromBase(versions, elevData):
         for k in elevData.keys():
             if not (k in diffElevData):
                 diffElevData[k] = {}
-            diffElevData[k][v] = elevData[k][versions[0]] - elevData[k][versions[v]]
+            diffElevData[k][versions[v]] = elevData[k][versions[v]] - elevData[k][versions[0]]
     return diffElevData
 
 
@@ -105,17 +117,19 @@ def writeToCSV(writeData, diffData, filePath, versions):
     versionsStr = removePeriod(versions)
     header.extend(versionsStr)
     for v in range(1,len(versionsStr)):
-        header.append(versionsStr[0] + "-" + versionsStr[v])
+        header.append(versionsStr[v] + "-" + versionsStr[0])
     # Write to a CSV file for further analysis or viewing in Excel
     with open(outFileName, 'wb') as output:
         writer = csv.writer(output)
         writer.writerow(header)
         for k in writeData.keys():
-            stationList = filterStations(filePath)
+            stationList, stationAddress = filterStations(filePath)
             if k in stationList:
-                writeMe = splitKey(k)
-                writeMe.extend(writeData[k].values())
-                writeMe.extend(diffData[k].values())
+                writeMe = splitKey(stationAddress[k])
+                for v in versions:
+                    writeMe.append(writeData[k][v])
+                for v in range(1,len(versions)):
+                        writeMe.append(diffData[k][versions[v]])
                 writer.writerow(writeMe)
             else:
                 pass
