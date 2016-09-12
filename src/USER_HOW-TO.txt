@@ -72,10 +72,14 @@ errors. Common errors may include:
 3. HEC-RAS runs in an absurdly short time (less than 70 seconds or so).
    This will show up on the last line of the output file. Try running the
    model manually in HEC-RAS to make sure it runs to completion. The most
-   likely problem is that the model became unstable. Try using a different
-   time step or locating where the model becomes unstable. Slightly
-   adjusting HTAB parameters at unstable cross sections may also help model
-   stability.
+   likely problem is that the model became unstable or there was a HEC-HMS
+   error. Try using a different time step or locating where the model
+   becomes unstable. Adding or subtracting 0.01 to the HTAB parameter at
+   the unstable cross section and 3-5 cross sections on either side of it
+   may also help model stability. Do NOT edit the HTAB parameter in the
+   HEC-RAS GUI. This will cause a Fortran error in the model code itself.
 
 ## Notes ##
-[none at the moment]
+--I repeat, do NOT edit the HTAB parameter in the HEC-RAS GUI. If you do
+  and you get a Fortran error, replace the geometry file with the original
+  version (which I hope you saved from a prior model setup).

@@ -21,7 +21,8 @@ class Subbasin(Element):
                                  self.canopy.getName(), self.rlsrate.getName(), self.redevel.getName()]
 
     @classmethod
-    def readSubbasin(cls, currentLine, basinsrc, basinsink, redevel, altRDdict, curvenum, rlsrate, altRRdict):
+    def readSubbasin(cls, currentLine, basinsrc, basinsink, redevel, altRDdict, curvenum, rlsrate, altRRdict,
+                     canopyrate, altCANdict):
         s = Subbasin()
         super(Subbasin, s).deserialize(currentLine, basinsrc)
         ID = s.getIdentifier()
@@ -33,7 +34,11 @@ class Subbasin(Element):
             RRrate = altRRdict[ID]
         else:
             RRrate = rlsrate
-        sNew, soname = s.divideSubbasin(basinsink, RDrate, curvenum, RRrate)
+        if ID in altCANdict:
+            CANrate = altCANdict[ID]
+        else:
+            CANrate = canopyrate
+        sNew, soname = s.divideSubbasin(basinsink, RDrate, curvenum, RRrate, CANrate)
         s.rlsrate.setValue(RRrate)
         s.redevel.setValue(RDrate)
         s.serialize(basinsink)
@@ -89,10 +94,10 @@ class Subbasin(Element):
                 except LookupError:
                     print("Property not found.")
 
-    def divideSubbasin(self, basinsink, redevel, curvenum, rlsrate):
+    def divideSubbasin(self, basinsink, redevel, curvenum, rlsrate, canrate):
         j = Junction.newJunction(self, basinsink)
         r = Reservoir.newReservoir(self, basinsink, redevel, rlsrate)
-        sNew = Subbasin.newSubbasin(self, basinsink, redevel, curvenum)
+        sNew = Subbasin.newSubbasin(self, basinsink, redevel, curvenum, canrate)
         self.area.setValue(self.area.getAsFloat() - sNew.area.getAsFloat())
         self.downstream.setValue('JN ' + self.getIdentifier())
         sNew.rlsrate.setValue(rlsrate)
@@ -100,7 +105,7 @@ class Subbasin(Element):
         return sNew, r.storageoutflow.getAsString()
 
     @classmethod
-    def newSubbasin(cls, s, basinsink, redevel, curvenum):
+    def newSubbasin(cls, s, basinsink, redevel, curvenum, canrate):
         sNew = copy.deepcopy(s)
         sNew.setIdentifier(s.getIdentifier() + 'MWRD')
         sNew.area.setValue((redevel / 100.) * s.area.getAsFloat())
@@ -108,7 +113,7 @@ class Subbasin(Element):
         sNew.canopy.setValue('SMA')
         # Define new canopy properties
         initCanopy = Property.newProperty('Initial Canopy Storage Percent', 0)
-        maxCanopy = Property.newProperty('Canopy Maximum Storage', 0.52)
+        maxCanopy = Property.newProperty('Canopy Maximum Storage', canrate)
         endCanopy = Property.newProperty('End Canopy', '')
         super(Subbasin, sNew).insert(super(Subbasin, sNew).index(sNew.canopy) + 1, endCanopy)
         super(Subbasin, sNew).insert(super(Subbasin, sNew).index(sNew.canopy) + 1, maxCanopy)

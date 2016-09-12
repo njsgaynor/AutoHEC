@@ -62,7 +62,9 @@ def reassignKeys(dataDict):
 
 
 def filterStations(filePath):
-    with open(filePath + "USC_MEEKMA_XS.csv", 'rb') as inputFile:
+    # Reformat the station IDs listed in the CSV file. Later use this list to filter which stations are included.
+    # The list is from the GIS people who are making the maps since not all cross sections are on the maps.
+    with open(filePath + "USC_MEEKMA_XS.csv", 'rb') as inputFile: #"StonyCkXS_Zoe.csv", 'rb') as inputFile:  #
         stationList = []
         stationAddress = {}
         reader = csv.reader(inputFile)
@@ -82,11 +84,13 @@ def filterStations(filePath):
 
 
 def splitKey(k):
+    # Split the key to get river, reach, and station ID as separate variables
     sKey = k.split('/')
     return [sKey[0], sKey[1], sKey[2]]
 
 
 def removePeriod(versions):
+    # The GIS software doesn't like periods in column headers, so replace them with underscores
     versions2 = versions[:]
     for v in range(len(versions)):
         versions2[v] = 'v' + versions[v]
@@ -99,6 +103,7 @@ def removePeriod(versions):
 
 
 def diffFromBase(versions, elevData):
+    # Find the difference between the base model (first in the list) data and the current model version data
     diffElevData = {}
     for v in range(1,len(versions)):
         for k in elevData.keys():
@@ -136,6 +141,7 @@ def writeToCSV(writeData, diffData, filePath, versions):
 
 
 def getPeak(versions, filePath):
+    # Reads data from a text file created in getPeakData.py
     print("Reading peak flow data from text file...")
     elevData = {}
     for v in versions:

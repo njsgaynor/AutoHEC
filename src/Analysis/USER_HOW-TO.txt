@@ -85,4 +85,5 @@ files using a graphical format.
 
 
 ## Notes ##
-[none at the moment]
+--makeMaxWselCsv.py would need more revision to be useful outside of this project. The purpose of it is to extract
+  data for a GIS map of the max water surface elevation difference between two models at specified cross sections.

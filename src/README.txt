@@ -19,7 +19,11 @@ at the Illinois State Water Survey (2015-2016).
 
 
 ## Known issues ##
-No known issues. (4/22/2016)
+No known issues with this code. (7/8/2016)
+**A warning about using the HEC-RAS model: Do NOT edit the HTAB parameter
+in the HEC-RAS GUI. It causes a Fortran error in the model code itself.
+If you do and you get a Fortran error, replace the geometry file with
+the original version (which I hope you saved from a prior model setup).**
 
 
 ## Structure of automation code from Optimatics (as modified by NJS Gaynor) ##

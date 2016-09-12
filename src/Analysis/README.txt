@@ -1,7 +1,8 @@
 ### Analyzing HEC-HMS and HEC-RAS output: part of the AutoHEC package ###
 Code repository for automation scripts related to the Metropolitan Water
 Reclamation District of Greater Chicago Watershed Release Rate project
-at the Illinois State Water Survey (2015-2016).
+at the Illinois State Water Survey (2015-2016). Any files with "config"
+in the file name set parameters for a script in the same directory.
   *Developed using Python 2.7.11, HEC-HMS 3.5, HEC-RAS 4.0, and HEC-DSSVue 2.0.1
   *Creator(s): Nicole JS Gaynor, ISWS
   *User instrutions in AutoHEC/src/Analysis/USER_HOW-TO.txt
@@ -60,6 +61,59 @@ or uncomment the method call**
 --depends on: HEC_Inundation_Config.py
 
 
+## Structure of calcTotalStorage.py ##
+--getData(): calls getStorageData.py, which extracts the storage-outflow data
+  for each subbasin from the RAS DSS file
+--roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
+  figures; for river stations, sigfigs is seven because only eight
+  characters are allowed
+--readFromFile(filePath, fileName): reads data from a pickled file created using
+  getPeakData.py
+--reassignKeys(dataDict): the original keys are the complete data address in the
+  DSS file. This changes it to only include the river, reach, and station ID
+  separated by spaces (no forward slash).
+--recordTotalStorage(storage, subbasin, totStorage): records the highest storage
+  value in the storage-outflow curve to the totStorage variable
+--writeTotalStorage(totStorage, fileName, filePath, versions): writes the full
+  list of total storage volumes from all subbasins to a CSV file with the
+  associated subbasin name
+--getStorage(versions, fileName, filePath):
+
+
+## Structure of Compare_hydrographs.py ##
+--getData(): calls getFlowData.py, which extracts the flow data
+  for each station from the RAS DSS file
+--roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
+  figures; for river stations, sigfigs is seven because only eight
+  characters are allowed
+--readFromFile(filePath, fileName): reads data from a pickled file created using
+  getPeakData.py
+--reassignKeys(dataDict): the original keys are the complete data address in the
+  DSS file. This changes it to only include the river, reach, and station ID
+  separated by spaces (no forward slash).
+--plotLines(filePath, plotData, figName, versions): Plots the hydrographs in multiple
+  datasets on a single axis for comparison
+--getFlow(versions, filePath): reads data from text files created using getFlowData.py,
+  matches stations, and calls plotLines to plot both hydrographs curves
+
+
+## Structure of Compare_Inundation.py ##
+--roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
+  figures; for river stations, sigfigs is seven because only eight
+  characters are allowed
+--readFromFile(filePath, fileName): reads  data from pickled file [not used]
+--readFromCSV(filePath, fileName): Reads inundation data from CSV file
+--findDiff(baseData, compareData): calculates the difference in inundation
+  depth and time between two model versions. If the base model version shows no out-
+  of-banks depth, the difference is set to -1; if the comparison model version shows
+  no out-of-banks depth, the difference is set to -2. Any depth differences >0.1 ft
+  or time differences >0.5 are printed in the output with the station ID.
+--getPeak(versions, filePath, savePath, watershed, timestep): drives the looping process through
+  each model version, calling other methods
+--plotScatter(dataX, dataY, versions, filePath, timestep): Plots the difference between two datasets
+  on a scatter plot with depth on the y-axis and time on the x-axis.
+
+
 ## Structure of Compare_peakTimeElev.py ##
 --getData(): calls getPeakData.py, which extracts the max stage
   and the time of the max stage for each station
@@ -98,40 +152,6 @@ or uncomment the method call**
   specified storage-outflow curves
 
 
-## Structure of Compare_hydrographs.py ##
---getData(): calls getFlowData.py, which extracts the flow data
-  for each station from the RAS DSS file
---roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
-  figures; for river stations, sigfigs is seven because only eight
-  characters are allowed
---readFromFile(filePath, fileName): reads data from a pickled file created using
-  getPeakData.py
---reassignKeys(dataDict): the original keys are the complete data address in the
-  DSS file. This changes it to only include the river, reach, and station ID
-  separated by spaces (no forward slash).
---plotLines(filePath, plotData, figName, versions): Plots the hydrographs in multiple
-  datasets on a single axis for comparison
---getFlow(versions, filePath): reads data from text files created using getFlowData.py,
-  matches stations, and calls plotLines to plot both hydrographs curves
-
-
-## Structure of Compare_Inundation.py ##
---roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
-  figures; for river stations, sigfigs is seven because only eight
-  characters are allowed
---readFromFile(filePath, fileName): reads  data from pickled file [not used]
---readFromCSV(filePath, fileName): Reads inundation data from CSV file
---findDiff(baseData, compareData): calculates the difference in inundation
-  depth and time between two model versions. If the base model version shows no out-
-  of-banks depth, the difference is set to -1; if the comparison model version shows
-  no out-of-banks depth, the difference is set to -2. Any depth differences >0.1 ft
-  or time differences >0.5 are printed in the output with the station ID.
---getPeak(versions, filePath, savePath, watershed, timestep): drives the looping process through
-  each model version, calling other methods
---plotScatter(dataX, dataY, versions, filePath, timestep): Plots the difference between two datasets
-  on a scatter plot with depth on the y-axis and time on the x-axis.
-
-
 ## Structure of makeMaxWselCsv.py ##
 --getData(): calls getPeakData.py, which extracts the max stage
   and the time of the max stage for each station
@@ -140,16 +160,40 @@ or uncomment the method call**
   characters are allowed
 --readFromFile(filePath, fileName): reads data from a pickled file created using
   getPeakData.py
---reassignKeys(dataDict): the original keys are the
-  complete data address in the DSS file. This changes it to only include the river, reach,
-  and station ID separated by spaces (no forward slash).
+--reassignKeys(dataDict): the original keys are the complete data address in the
+  DSS file. This changes it to only include the river, reach, and station ID
+  separated by spaces (no forward slash).
+--filterStations(filePath): keep data only from stations that match the list provided
+  by the GIS person (Ryan or Zoe, in this case)
 --splitKey(k): splits a key into river, reach, and station ID as three separate items
 --filterStations(filePath): filters the stations that are stored for output using the
   provided CSV file (currently "USC_MEEKMA_CSV.csv")
 --removePeriod(versions): replaces the decimal in a version number with an underscore,
   hopefully allowing direct import into GIS software
+--diffFromBase(versions, eleveData): finds the difference between the base model (first
+  in the list) and the current model version data
 --writeToCSV(writeData, filePath, versions): writes max stage from all versions listed
   in Compare_Config.py to a CSV file, along with the river, reach, and station IDs as
   filtered using filterStations. CSV file includes a header row.
 --getPeak(versions, filePath, runName): driver method that reads in, processes, and
   writes max stage data to a CSV file.
+
+
+## Structure of Plot_multipanel_hydrographs.py ##
+--getData(): calls getMultiplotData.py, which extracts the specified cross-sectional
+  data from the specified model versions
+--roundSigFigs(num, sigfigs): rounds num to sigfigs number of significant
+  figures; for river stations, sigfigs is seven because only eight
+  characters are allowed
+--readFromFile(filePath, fileName): reads data from a pickled file created using
+  getPeakData.py
+--reassignKeys(dataDict): the original keys are the complete data address in the DSS
+  file. This changes it to only include the river, reach, and station ID separated
+  by spaces (no forward slash).
+--plotLines(filePath, plotData, k1, labels, versions, fn, vDesc): plots the data
+  that was extracted from the DSS file for each specified cross section and model
+  verison on a series of axes.
+--getListFromFile(filePath, fileName): reads list of data addresses or labels from
+  user-created text files in the model directory
+--getFlow(versions, filePath, vDesc): gets all flow data and metadata to plot
+  hydrographs

@@ -48,7 +48,7 @@ def copyFiles(ws, metFile):
         shutil.copyfile(metFile, metFile + ".backup")
 
 
-def readSubbasinOptionsFiles(modelVersion, altRD, altRD2, altRR, altRR2):
+def readSubbasinOptionsFiles(modelVersion, altRD, altRD2, altRR, altRR2, altCAN):
     altRRfile = open(modelVersion + "alt_RR_basins.txt", 'rb')
     altRRlist = altRRfile.readlines()
     altRRfile.close()
@@ -61,12 +61,17 @@ def readSubbasinOptionsFiles(modelVersion, altRD, altRD2, altRR, altRR2):
     altRDfile2 = open(modelVersion + "alt_RD_basins2.txt", 'rb')
     altRDlist2 = altRDfile2.readlines()
     altRDfile2.close()
+    altCANfile = open(modelVersion + "alt_can_basins.txt", 'rb')
+    altCANlist = altCANfile.readlines()
+    altCANfile.close()
     altRRlist[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist]
     altRRlist2[:] = [r.strip('\n').strip('\r').upper() for r in altRRlist2]
     altRDlist[:] = [r.strip('\n').strip('\r').upper() for r in altRDlist]
     altRDlist2[:] = [r.strip('\n').strip('\r').upper() for r in altRDlist2]
+    altCANlist[:] = [r.strip('\n').strip('\r').upper() for r in altCANlist]
     altRRdict = {}
     altRDdict = {}
+    altCANdict = {}
     for i in altRRlist:
         altRRdict[i] = altRR
     for i in altRRlist2:
@@ -75,7 +80,9 @@ def readSubbasinOptionsFiles(modelVersion, altRD, altRD2, altRR, altRR2):
         altRDdict[i] = altRD
     for i in altRDlist2:
         altRDdict[i] = altRD2
-    return altRRdict, altRDdict
+    for i in altCANlist:
+        altCANdict[i] = altCAN
+    return altRRdict, altRDdict, altCANdict
 
 
 def readBasinFile(ws, scriptPath, modelVersion):
@@ -98,8 +105,8 @@ def readBasinFile(ws, scriptPath, modelVersion):
     print(subbasinFile)
     # Make backup of *.pdata file
     shutil.copyfile(ws['pdatafile'], pdatabackup)
-    altRRdict, altRDdict = readSubbasinOptionsFiles(modelVersion, ws['redevelopmentalt'], ws['redevelopmentalt2'],
-                                                    ws['releaseratealt'], ws['releaseratealt2'])
+    altRRdict, altRDdict, altCANdict = readSubbasinOptionsFiles(modelVersion, ws['redevelopmentalt'], ws['redevelopmentalt2'],
+                                                    ws['releaseratealt'], ws['releaseratealt2'], ws['canopyalt'])
     # Read elements from *.basin file and split the subbasins; write to new *.basin file
     # Also create list of table names (txt) and and subbasins/release rates (JSON) and write to files for later use
     with open(ws['basinin'], 'rb') as basinsrc, open(ws['basinout'], 'wb') as basinsink, open(ws['pdatafile'], 'ab') \
@@ -122,7 +129,8 @@ def readBasinFile(ws, scriptPath, modelVersion):
                     b = Basin.readBasin(currentLine, basinsrc, basinsink)
                 elif currentLine.startswith('Subbasin:'):
                     b, b2, soname = Subbasin.readSubbasin(currentLine, basinsrc, basinsink, ws['redevelopment'],
-                                                          altRDdict, ws['curvenumber'], ws['releaserate'], altRRdict)
+                                                          altRDdict, ws['curvenumber'], ws['releaserate'], altRRdict,
+                                                          ws['canopyrate'], altCANdict)
                     ID = b.getIdentifier()
                     ID2 = b2.getIdentifier()
                     if ID in altRRdict:

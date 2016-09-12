@@ -36,3 +36,5 @@ class Subwatershed(dict):
         self['releaserate'] = float(config.releaserate)
         self['releaseratealt'] = float(config.releaseratealt)
         self['releaseratealt2'] = float(config.releaseratealt2)
+        self['canopyrate'] = float(config.canopyrate)
+        self['canopyalt'] = float(config.canopyalt)
