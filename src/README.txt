@@ -28,6 +28,8 @@ the original version (which I hope you saved from a prior model setup).**
 
 ## Structure of automation code from Optimatics (as modified by NJS Gaynor) ##
 # runModel.cmd #
+** You must choose the input text file that lists the names of the config files.
+   Use two colons to comment out all the options you do *not* wish to use. **
 --description: sets environmental variables and initiates python scripts; command-
   line input should be text file that contains the prefixes for each hecConfig.py
   file
@@ -36,7 +38,8 @@ the original version (which I hope you saved from a prior model setup).**
 # *_hecConfig.py (class HecConfig imported as config) #
 --description: config file with setup variables for HMS and RAS runs;
   these files are copied to hecConfig.py for use in the program and the
-  original files are retained
+  original files are retained. There are different parent_hecConfig files for
+  each model location.
 --getDataTransferFilePath: returns path to a temporary file that stores pickled
   data for use later in the program
 --getHmsProjectPath: path to HMS project files
@@ -57,8 +60,8 @@ the original version (which I hope you saved from a prior model setup).**
 --createStorageOutflowCurves(subbasins): modifies the storage-outflow curve data based on
   Amanda Flegel's algorithm
 --runRas: runs HEC-RAS using HECRASController
---getHydraulicResults(ditchNames): retrieves and processes RAS results from DSS file using
-  ExampleHydraulicComparison.py and ExampleDssUsage.py
+--getHydraulicResults(ditchNames) [not currently used]: retrieves and processes RAS results
+  from DSS file using ExampleHydraulicComparison.py and ExampleDssUsage.py
 
 # runHecHmsModel.py #
 --description: runs HEC-HMS instance using hms python module; exactly as in HEC-HMS

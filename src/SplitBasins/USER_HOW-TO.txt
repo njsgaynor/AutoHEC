@@ -25,10 +25,14 @@ rating curves for each reservoir for a second HEC-HMS run.
    for a single subsubwatershed. **When preparing the bank station
    elevations file, do not include Node Names in the table (under
    Options menu in the Profile Output Table of HEC-RAS).**
-2. Open Windows Command Prompt.
-3. Change to directory containing runInitHMS.cmd (AutoHEC/src/WeRunFirst)
+2. Modify (or create) text files that specify the subbasin names for
+   alternative release rates, redevelopment rates, and canopy values. These
+   include alt_RR_basins.txt, alt_RR_basins2.txt, alt_RD_basins.txt,
+   alt_RD_basins.txt, and alt_can_basins.txt.
+3. Open Windows Command Prompt.
+4. Change to directory containing runInitHMS.cmd (AutoHEC/src/WeRunFirst)
    directory ("dir" lists directory contents and "cd" changes directory).
-4. Type "runInitHMS.cmd" into the Windows command line and press Enter.
+5. Type "runInitHMS.cmd" into the Windows command line and press Enter.
    Output will be saved to output.txt.
 
 ## Notes ##

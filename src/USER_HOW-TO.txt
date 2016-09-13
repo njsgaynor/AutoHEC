@@ -41,14 +41,17 @@ HEC-HMS run listed in the command-line input file in runModel.cmd.
 How to run code that splits basins and runs models**:
 1. Modify *_hecConfig.py files to find the files that need to be
    modified and to reflect the characteristics of the future subbasins.
-2. Create a text file that lists the prefixes for the *_hecConfig.py
+2. Modify/create a text file that lists the prefixes for the *_hecConfig.py
    files needed for the HEC-HMS runs. Use this file name as the input in
    runModel.cmd.
-3. Create text files called "alt_RR_basins.txt" and "alt_RR_basins2.txt"
+3. Modify/create text files that list the subbasin names where alternative
+   release rates, redevelopment rates, and canopy values should be used.
    that list the subbasins that should use the alternative release rates
-   (releaseratealt and releaseratealt2) instead of the regular release
-   rate. This file needs to exist and should be empty if all the subbasins
-   use the regular release rate.
+   These parameters are set using releaseratealt, releaseratealt2,
+   redevelopmentalt, redevelopmentalt2, and canopy alt. The file nams are
+   alt_RR_basins.txt, alt_RR_basins2.txt, alt_RD_basins.txt,
+   alt_RD_basins2.txt, alt_can_basins.txt,  These files need to exist and
+   should be empty if all the subbasins use the regular release rate.
 4. Open Windows Command Prompt.
 5. Change to directory containing runModel.cmd (AutoHEC/src)
    directory ("dir" lists directory contents and "cd" changes directory).

@@ -19,10 +19,15 @@ at the Illinois State Water Survey (2015-2016).
   processing of data for HEC-HMS and HEC-RAS model runs
 --depends on: contents of hecElements, Subwatershed_class,
   Tablenames_class, SBDict_class
---UpdatePdataFile(pd, pdatasink): not currently used.
+--readSubbasinOptionsFiles(modelVersion, altRD, altRD2, altRR, altRR2, altCAN):
+  reads the text files that contain lists of subbasin names for which the model
+  should use alternative redevelopment rates, release rates, or canopy values.
 --readBasinFile(ws): reads the input *.basin file, splits subbasins
   (and does related tasks via imported modules, and writes updated
   *.basin file
+--readLists(fileName): reads a file with one item per line into a list
+--writeJsonInput(subbasinList, stationList, inputFileName): outputs list of
+  subbasin names and list of stations to a JSON file for use in a later script.
 --modMetFile(metFile, metData, hmsPath, sbList): adds the new
   subbasins to the relevant *.met file
 --main(config): drives the workflow

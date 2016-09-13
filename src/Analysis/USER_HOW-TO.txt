@@ -50,7 +50,7 @@ files using a graphical format.
    Compare_Inundation_output.txt.
 
 
-## How to run code that plots hydrographs ##
+## How to run code that plots single-panel hydrographs ##
 1. Modify Compare_Config.py.
 2. Open Windows Command Prompt.
 3. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
@@ -58,6 +58,21 @@ files using a graphical format.
 4. Type "Compare_hydrographs.py > Compare_hydrographs_output.txt" into the Windows
    command line and press Enter. Output will be saved to
    Compare_hydrographs_output.txt.
+
+
+## How to run code that plots multi-panel hydrographs ##
+1. Modify Compare_Config.py. The first version in the list is the base model and will
+   be plotted on all panels.
+2. Modify multipanel_plot_data_addresses.txt and multipanel_plot_data_labels.txt in
+   the model location folder (parent to the model version folders) to show which
+   cross sections you want to plot and how to label each of them. Use a completely
+   blank line to separate sets of hydrographs for each panel.
+3. Open Windows Command Prompt.
+4. Change to directory AutoHEC/src/Analysis ("dir" lists directory contents
+   and "cd" changes directory).
+5. Type "Plot_multipanel_hydrographs.py > Plot_multipanel_hydrographs_output.txt" into the Windows
+   command line and press Enter. Output will be saved to
+   Plot_multipanel_hydrographs_output.txt.
 
 
 ## How to run code that plots storage-outflow curves ##
@@ -85,5 +100,6 @@ files using a graphical format.
 
 
 ## Notes ##
---makeMaxWselCsv.py would need more revision to be useful outside of this project. The purpose of it is to extract
-  data for a GIS map of the max water surface elevation difference between two models at specified cross sections.
+--makeMaxWselCsv.py would need more revision to be useful outside of this project.
+  The purpose of it is to extract data for a GIS map of the max water surface elevation
+  difference between two models at specified cross sections.

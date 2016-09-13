@@ -18,7 +18,7 @@ def getData():
     popd=os.getcwd()
     dssvuePath = "C:/Program Files (x86)/HEC/HEC-DSSVue/"
     os.chdir(dssvuePath)
-    # Path to scritp that extracts data from DSS file
+    # Path to script that extracts data from DSS file
     scriptPath = "C:/Users/nschiff2/IdeaProjects/AutoHEC/src/Analysis/"
     # Use HEC-DSSVue to run script (only way to use hec package that accesses DSS files)
     call(["HEC-DSSVue.cmd", "-s", scriptPath + "getStorageData.py"], shell=True)
