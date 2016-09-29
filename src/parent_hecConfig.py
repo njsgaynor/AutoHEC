@@ -1,4 +1,6 @@
-#Configuration that is used through all HEC Python/Jython scripts
+# Configuration that is used through all HEC Python/Jython scripts
+# **You need to comment out some lines in the MPDT and StonyCreek
+#   configuration files when running the 24hr version.**
 
 def setme1(self):
     # General model settings
@@ -10,7 +12,7 @@ def setme1(self):
     self.scriptPath="C:/Users/nschiff2/IdeaProjects/AutoHEC/src"
     self.hmsDir="HEC-HMS"
     self.modelPath = "G:/PROJECTS_non-FEMA/MWRD_ReleaseRate_Phase1/H&H/StonyCreek/"
-    self.modelVersion = self.modelPath + "Stony_V17/"
+    self.modelVersion = self.modelPath + "Stony_test/"
     self.hmsVersion = self.modelVersion + "HydrologicModels/ExistingConditions/"
     self.hmsCommand="HEC-HMS.cmd"
     self.dssDir="HEC-DSSVue"
@@ -18,7 +20,7 @@ def setme1(self):
 
     # Use these options only when you need a different model version to build the
     # storage-outflow curves
-    self.osModelVersion = self.modelPath + "Stony_V17_24/"
+    self.osModelVersion = self.modelPath + "Stony_test_24/"
     self.osHmsVersion = self.osModelVersion + "HydrologicModels/ExistingConditions/"
 
     return self

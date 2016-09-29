@@ -17,6 +17,7 @@ class HecConfig:
         # ["LUDT_Design", "LDDT_HMS", "MEDT_HMS", "MPDT_revised", "OLCRHMS", "STCR_combined"]
 
         self = parent_hecConfig.setme2(self)
+        # comment out the next line when running a 24hr version
         self.hmsMetFile = self.hmsProjectPath + "/100YR12HRHUFFARF"
         self.basinin = self.hmsProjectPath + "/OLCR_newbound - Copy.basin"
         self.basinout = self.hmsProjectPath + "/OLCR_newbound.basin"
